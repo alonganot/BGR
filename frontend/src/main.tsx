@@ -1,6 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import App from './App.tsx'
+import AdminPage from './pages/AdminPage.tsx'
 import './index.css'
 
 import {
@@ -15,7 +16,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/admin",
-    element: <div>Hello admin!</div>,
+    element: <AdminPage />,
   },
 ]);
 
