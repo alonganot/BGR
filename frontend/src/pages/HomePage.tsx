@@ -42,7 +42,7 @@ function HomePage() {
       <Grid container>
         <Grid item xs={10} />
         <Grid item xs={2}>
-          <Button variant="outlined"><Link to="admin">להתחברות</Link></Button>
+          <Button variant="outlined"><Link to="/admin">להתחברות</Link></Button>
         </Grid>
       </Grid>
       <Box sx={{display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
@@ -54,7 +54,7 @@ function HomePage() {
       </Box>
       <Grid container>
         <Grid item xs={2}>
-          <Button variant="outlined"><Link to="details">למילוי הפרטים</Link></Button>
+          <Button variant="outlined"><Link to="/details">למילוי הפרטים</Link></Button>
         </Grid>
         <Grid item xs={10} />
       </Grid>
