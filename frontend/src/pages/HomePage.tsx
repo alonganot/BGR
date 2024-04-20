@@ -1,40 +1,64 @@
-import { useState } from 'react'
 import { Link } from "react-router-dom";
-import { Button } from '@mui/material';
+import { Box, Button, Grid, Typography } from '@mui/material';
+import styled from "styled-components";
 
-import reactLogo from '../assets/react.svg'
-import viteLogo from '../assets/vite.svg'
 
 import '../styles/HomePage.css'
 
 function HomePage() {
+  const Title = styled(Typography)({
+    fontWeight: 'bold !important',
+  })
 
-  const [count, setCount] = useState(0)
+  const Subtitle = styled(Typography)({
+    fontWeight: 'bold !important',
+    maxWidth: '35vw'
+  })
+
+  const Information = styled(Typography)({
+    textAlign: 'start',
+    paddingRight: '3vw',
+    paddingLeft: '16vw',
+    direction: 'rtl'
+  })
+
+  const titleText = 'סקר'
+  const subtitleText = 'מהו הייצוג הגרפי המיטבי למקבלי שירות עם מוגבלות שכלית'
+  const infoText = `
+  מדריך/ה יקר/ה, בשאלון הבא יוצגו מילים ותמונות שלהן.
+  מקבל/ת השירות ת/יתבקש להתאים לכל מילה את התמונה המתאימה. עבור כל מילה, עליך/עלייך לשאול את השאלה המופיעה,
+  ללחוץ על "הבא" ומיד להתחיל למדוד את הזמן שלקח למקבל/ת השירות להשיב. בכל שאלה עליך/עלייך לסמן את תשובתו/ה של
+  מקבל/ת השירות.
+  
+  עבור כל שאלה, מופעל שעון שקוצב את הזמן בשניות עד לרגע בו בחרת את התשובה הנכונה.
+  
+  בתודה על שיתוף הפעולה!
+  
+  צוות המחקר של קרן שלם.
+  `
 
   return (
     <>
-     <div>This is the homepage!</div>
-     <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <Button variant="outlined"><Link to="admin">להתחברות</Link></Button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>    </>
+      <Grid container>
+        <Grid item xs={10} />
+        <Grid item xs={2}>
+          <Button variant="outlined"><Link to="admin">להתחברות</Link></Button>
+        </Grid>
+      </Grid>
+      <Box sx={{display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
+        <Title variant='h3'>{titleText}</Title>
+        <Subtitle variant='h4'>{subtitleText}</Subtitle>
+      </Box>
+      <Box sx={{paddingTop: '2vh'}}>
+        <Information variant='h6'>{infoText}</Information>
+      </Box>
+      <Grid container>
+        <Grid item xs={2}>
+          <Button variant="outlined"><Link to="details">למילוי הפרטים</Link></Button>
+        </Grid>
+        <Grid item xs={10} />
+      </Grid>
+      </>
   )
 }
 
