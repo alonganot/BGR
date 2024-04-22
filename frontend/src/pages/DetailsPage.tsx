@@ -1,17 +1,24 @@
-import { Button, Grid, Icon } from "@mui/material"
+import { Button, Grid } from "@mui/material"
 import { Link } from "react-router-dom"
+import SelfInfoForm from "../components/SelfInfoForm"
 
 function DetailsPage() {
   return (
     <>
-    <Grid container>
+      <Grid container>
         <Grid item xs={10} />
         <Grid item xs={2}>
           <Button variant="outlined"><Link to="/">חזרה לדף הבית</Link></Button>
         </Grid>
       </Grid>
-     <div>DetailsPage</div>
-     <Icon>star</Icon>
+      <Grid container justifyContent={'space-evenly'}>
+        <Grid item>
+          <SelfInfoForm />
+        </Grid>
+        <Grid item>
+          <SelfInfoForm />
+        </Grid>
+      </Grid>
     </>
   )
 }

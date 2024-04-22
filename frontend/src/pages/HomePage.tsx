@@ -4,17 +4,9 @@ import styled from "styled-components";
 
 
 import '../styles/HomePage.css'
+import { Subtitle, Title } from "../styles/SharedStyles";
 
 function HomePage() {
-  const Title = styled(Typography)({
-    fontWeight: 'bold !important',
-  })
-
-  const Subtitle = styled(Typography)({
-    fontWeight: 'bold !important',
-    maxWidth: '35vw'
-  })
-
   const Information = styled(Typography)({
     textAlign: 'start',
     paddingRight: '3vw',
