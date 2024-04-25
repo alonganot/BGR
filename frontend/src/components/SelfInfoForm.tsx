@@ -2,53 +2,51 @@ import {
     FormControl, FormControlLabel, FormLabel, MenuItem, Radio, RadioGroup,
     Select, SelectChangeEvent, TextField
 } from '@mui/material'
-import { ChangeEvent, useState } from 'react';
+import { ChangeEvent } from 'react';
 import { Title } from '../styles/SharedStyles';
-import { GenderEnum } from '../types/User';
+import { CAN_READ_OPTIONS, GENDER_OPTIONS } from '../constants';
+import { useUserContext } from '../context/UserContext';
 
 function SelfInfoForm() {
-    const [gender, setGender] = useState('');
-    const [canRead, setCanRead] = useState('');
-    const [age, setAge] = useState(18);
+    const { user, setUser } = useUserContext();
     const MIN_AGE = 5
 
     const changeGender = (event: SelectChangeEvent) => {
-        setGender(event.target.value as string);
+        setUser({...user, gender: event.target.value as string});
     };
 
     const changeCanRead = (event: SelectChangeEvent) => {
-        setCanRead(event.target.value as string);
+        setUser({...user, canRead: event.target.value as string});
     };
 
     const changeAge = (event: ChangeEvent<HTMLInputElement>) => {
-        setAge(+event.target.value as number);
+        setUser({...user, age: +event.target.value as number});
     };
 
     return (
         <>
             <Title variant='h4'>{'מעט פרטים על מקבל השירות'}</Title>
-            <Title variant='h4'>{gender}</Title>
             <FormControl sx={{ direction: 'rtl', paddingTop: '2vh' }}>
                 <TextField
                     id="age-select"
                     label="גיל"
                     type="number"
                     required
-                    value={age}
+                    value={user.age}
                     onChange={changeAge}
-                    error={age < MIN_AGE}
-                    helperText={age< MIN_AGE ? `לא ניתן לבצע את הסקר מתחת לגיל ${MIN_AGE}`: ''}
+                    error={user.age < MIN_AGE}
+                    helperText={user.age< MIN_AGE ? `לא ניתן לבצע את הסקר מתחת לגיל ${MIN_AGE}`: ''}
                 />
                 <FormLabel id="gender-label">מין</FormLabel>
                 <RadioGroup
                     aria-labelledby="gender-label"
                     name="gender-select"    
                     row
-                    value={gender}
+                    value={user.gender}
                     onChange={changeGender}
                 >
-                    {Object.values(GenderEnum).map((value, index) => (
-                        <FormControlLabel key={index} value={GenderEnum[value]} control={<Radio />} label={value} />
+                    {GENDER_OPTIONS.map((option, index) => (
+                        <FormControlLabel key={index} value={option.name} control={<Radio />} label={option.displayName} />
                     )) 
                     }
                 </RadioGroup>
@@ -57,13 +55,14 @@ function SelfInfoForm() {
                     labelId="can-read-label"
                     id="can-read-select"
                     required
-                    value={canRead}
+                    value={user.canRead}
                     label="האם יודע/ת לקרוא"
                     onChange={changeCanRead}
                 >
-                    <MenuItem value={'yes'}>כן</MenuItem>
-                    <MenuItem value={'no'}>לא</MenuItem>
-                    <MenuItem value={'some'}>מעט</MenuItem>
+                    {CAN_READ_OPTIONS.map((option, index) => (
+                        <MenuItem key={index} value={option.name}>{option.displayName}</MenuItem>
+                    )) 
+                    }
                 </Select>
             </FormControl>
         </>

@@ -9,8 +9,9 @@ import Navbar from "./components/Navbar.tsx";
 import { Box } from "@mui/material";
 import DetailsPage from "./pages/DetailsPage.tsx";
 import NotFoundPage from "./pages/NotFoundPage.tsx";
+import { UserProvider } from "./context/UserContext.tsx";
 
-function App() {
+function App() {  
   const router = createBrowserRouter([
     {
       path: "/",
@@ -28,10 +29,13 @@ function App() {
       errorElement: <NotFoundPage />
     },
   ]);
+
   return (
     <Box sx={{width: '100vw', height: '100vh', margin: 0, padding: 0}}>
-      <Navbar />
-      <RouterProvider router={router} />
+      <UserProvider>
+        <Navbar />
+        <RouterProvider router={router} />
+      </UserProvider>
     </Box>
   )
 }
