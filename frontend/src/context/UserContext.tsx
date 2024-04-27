@@ -11,7 +11,12 @@ export const useUserContext = () => useContext(UserContext) as iUserContext
 const defaultUser: User = {
     age: 0,
     gender: '',
-    canRead: ''
+    canRead: '',
+    frame: {
+        name: '',
+        organization: '',
+        city: ''
+    }
 }
 
 export const UserProvider = ({ children }: { children: ReactNode}) => {

@@ -1,6 +1,7 @@
 import { Button, Grid } from "@mui/material"
 import { Link } from "react-router-dom"
 import SelfInfoForm from "../components/SelfInfoForm"
+import FrameInfoForm from "../components/FrameInfoForm"
 
 function DetailsPage() {
   return (
@@ -13,7 +14,7 @@ function DetailsPage() {
       </Grid>
       <Grid container justifyContent={'space-evenly'}>
         <Grid item>
-          <SelfInfoForm />
+          <FrameInfoForm />
         </Grid>
         <Grid item>
           <SelfInfoForm />
