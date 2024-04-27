@@ -10,6 +10,7 @@ import { Box } from "@mui/material";
 import DetailsPage from "./pages/DetailsPage.tsx";
 import NotFoundPage from "./pages/NotFoundPage.tsx";
 import { UserProvider } from "./context/UserContext.tsx";
+import FormPage from "./pages/FormPage.tsx";
 
 function App() {  
   const router = createBrowserRouter([
@@ -26,6 +27,11 @@ function App() {
     {
       path: "/details",
       element: <DetailsPage />,
+      errorElement: <NotFoundPage />
+    },
+    {
+      path: "/form",
+      element: <FormPage />,
       errorElement: <NotFoundPage />
     },
   ]);

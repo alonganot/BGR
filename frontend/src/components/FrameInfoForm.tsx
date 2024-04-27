@@ -1,6 +1,4 @@
-import {
-    FormControl, FormLabel, TextField
-} from '@mui/material'
+import { FormControl, TextField } from '@mui/material'
 import { ChangeEvent } from 'react';
 import { Title } from '../styles/SharedStyles';
 import { useUserContext } from '../context/UserContext';
@@ -31,7 +29,7 @@ function FrameInfoForm() {
                     value={user.frame.name}
                     onChange={changeFrameName}
                     error={user.frame.name.length === 0}
-                    helperText={user.frame.name.length === 0 ? `שדה זה הוא חובה`: ''}
+                    helperText={user.frame.name.length === 0 ? `שדה זה הוא חובה`: ' '}
                 />
                 <TextField
                     id="frame-organization-select"
@@ -40,7 +38,7 @@ function FrameInfoForm() {
                     value={user.frame.organization}
                     onChange={changeFrameOrganization}
                     error={user.frame.organization.length === 0}
-                    helperText={user.frame.organization.length === 0 ? `שדה זה הוא חובה`: ''}
+                    helperText={user.frame.organization.length === 0 ? `שדה זה הוא חובה`: ' '}
                 />
                 <TextField
                     id="frame-city-select"
@@ -49,7 +47,7 @@ function FrameInfoForm() {
                     value={user.frame.city}
                     onChange={changeFrameCity}
                     error={user.frame.city.length === 0}
-                    helperText={user.frame.city.length === 0 ? `שדה זה הוא חובה`: ''}
+                    helperText={user.frame.city.length === 0 ? `שדה זה הוא חובה`: ' '}
                 />
             </FormControl>
         </>
