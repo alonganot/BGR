@@ -9,7 +9,7 @@ function Navbar() {
                 <Grid item xs={10}>
                 </Grid>
                 <Grid item xs={2}>
-                    <img src="../../public/kshalemlogo.png" alt="" />
+                    <img src="kshalemlogo.png" alt="" />
                 </Grid>
             </Grid>
         </>
