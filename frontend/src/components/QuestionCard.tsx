@@ -2,6 +2,7 @@ import { Button, Card, Grid } from "@mui/material";
 import { TopCenterTitle } from "../styles/SharedStyles";
 import { useUserContext } from "../context/UserContext";
 import { useState } from "react";
+import { Option } from "../types/Option";
 
 function QuestionCard({
   questionNum,
@@ -11,7 +12,7 @@ function QuestionCard({
 }: {
   questionNum: number;
   title: string;
-  options: string[];
+  options: Option[];
   correctIndex: number;
 }) {
   const { addAnswer, user } = useUserContext();
@@ -24,8 +25,10 @@ function QuestionCard({
   }
 
   const validateAnswer = (index: number) => {
-    addAnswer({ userId: user.id, questionTitle: title, selectedAnswer: index, wasCorrect: index === correctIndex,
-    secondsTaken: calcSecondsPassed(new Date()) });
+    addAnswer({
+      userId: user.id, questionNum: questionNum, questionTitle: title, selectedAnswer: index,
+      type: options[index].type, wasCorrect: index === correctIndex, secondsTaken: calcSecondsPassed(new Date())
+    });
   };
 
 
@@ -44,7 +47,7 @@ function QuestionCard({
                   validateAnswer(index);
                 }}
               >
-                <img src={option} />
+                <img src={option.url} />
               </Button>
             </Card>
           </Grid>

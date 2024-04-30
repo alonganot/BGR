@@ -5,34 +5,37 @@ import { Question } from "../types/Question";
 import QuestionCard from "../components/QuestionCard";
 import { ChangeEvent, useState } from "react";
 
+export const questions: Question[] = [
+  {
+    number: 1,
+    title: "בנק",
+    options: [
+      {url: "https://www.kshalem.org.il/wp-content/uploads/2024/04/2%D7%91%D7%A0%D7%A7.jpg", type: "image"},
+      {url: "https://www.kshalem.org.il/wp-content/uploads/2024/04/2%D7%91%D7%A0%D7%A7.jpg", type: "icon"},
+      {url: "https://www.kshalem.org.il/wp-content/uploads/2024/04/2%D7%91%D7%A0%D7%A7.jpg", type: "image"},
+      {url: "https://www.kshalem.org.il/wp-content/uploads/2024/04/2%D7%91%D7%A0%D7%A7.jpg", type: "icon"}
+    ],
+    correctIndex: 2,
+  },
+  {
+    number: 2,
+    title: "מרפאה",
+    options: [
+      {url: "https://www.kshalem.org.il/wp-content/uploads/2024/04/2%D7%91%D7%A0%D7%A7.jpg", type: "image"},
+      {url: "https://www.kshalem.org.il/wp-content/uploads/2024/04/2%D7%91%D7%A0%D7%A7.jpg", type: "icon"},
+      {url: "https://www.kshalem.org.il/wp-content/uploads/2024/04/2%D7%91%D7%A0%D7%A7.jpg", type: "image"},
+      {url: "https://www.kshalem.org.il/wp-content/uploads/2024/04/2%D7%91%D7%A0%D7%A7.jpg", type: "icon"}
+    ],
+    correctIndex: 0,
+  },
+];
+
 function FormPage() {
   const [page, setPage] = useState(1);
   const changePage = (_event: ChangeEvent<unknown>, page: number) => {
     setPage(page);
   };
 
-  const questions: Question[] = [
-    {
-      title: "בנק",
-      options: [
-        "https://www.kshalem.org.il/wp-content/uploads/2024/04/2%D7%91%D7%A0%D7%A7.jpg",
-        "https://www.kshalem.org.il/wp-content/uploads/2024/04/2%D7%91%D7%A0%D7%A7.jpg",
-        "https://www.kshalem.org.il/wp-content/uploads/2024/04/2%D7%91%D7%A0%D7%A7.jpg",
-        "https://www.kshalem.org.il/wp-content/uploads/2024/04/2%D7%91%D7%A0%D7%A7.jpg",
-      ],
-      correctIndex: 2,
-    },
-    {
-      title: "מרפאה",
-      options: [
-        "https://www.kshalem.org.il/wp-content/uploads/2024/04/2%D7%91%D7%A0%D7%A7.jpg",
-        "https://www.kshalem.org.il/wp-content/uploads/2024/04/2%D7%91%D7%A0%D7%A7.jpg",
-        "https://www.kshalem.org.il/wp-content/uploads/2024/04/2%D7%91%D7%A0%D7%A7.jpg",
-        "https://www.kshalem.org.il/wp-content/uploads/2024/04/2%D7%91%D7%A0%D7%A7.jpg",
-      ],
-      correctIndex: 0,
-    },
-  ];
   return (
     <>
       <Grid container>
@@ -46,7 +49,7 @@ function FormPage() {
           </TopCenterTitle>
           <QuestionCard
             key={page}
-            questionNum={page}
+            questionNum={questions[page - 1].number}
             title={questions[page - 1].title}
             options={questions[page - 1].options}
             correctIndex={questions[page - 1].correctIndex}
