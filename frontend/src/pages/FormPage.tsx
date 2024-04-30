@@ -51,16 +51,16 @@ function FormPage() {
             options={questions[page - 1].options}
             correctIndex={questions[page - 1].correctIndex}
           />
-          <Pagination
-            page={page}
-            onChange={changePage}
-            count={questions.length}
-          />
         </Grid>
         <Grid item xs={2}>
           <Button variant="outlined">
             <Link to="/">חזרה לדף הבית</Link>
           </Button>
+          <Pagination
+            page={page}
+            onChange={changePage}
+            count={questions.length}
+          />
         </Grid>
       </Grid>
     </>

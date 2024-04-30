@@ -1,5 +1,7 @@
-import { Button, Card, Grid, Typography } from "@mui/material";
+import { Button, Card, Grid } from "@mui/material";
 import { TopCenterTitle } from "../styles/SharedStyles";
+import { useUserContext } from "../context/UserContext";
+import { useState } from "react";
 
 function QuestionCard({
   questionNum,
@@ -12,13 +14,20 @@ function QuestionCard({
   options: string[];
   correctIndex: number;
 }) {
+  const { addAnswer, user } = useUserContext();
+
+  const [startingTime] = useState<Date>(new Date())
+  const calcSecondsPassed: (answerTime: Date) => number = (answerTime: Date) => {
+    const msDifference = answerTime.getTime() - startingTime.getTime();
+
+    return msDifference / 1000;
+  }
+
   const validateAnswer = (index: number) => {
-    if (index === correctIndex) {
-      alert("true");
-    } else {
-      alert("false");
-    }
+    addAnswer({ userId: user.id, questionTitle: title, selectedAnswer: index, wasCorrect: index === correctIndex,
+    secondsTaken: calcSecondsPassed(new Date()) });
   };
+
 
   return (
     <>
