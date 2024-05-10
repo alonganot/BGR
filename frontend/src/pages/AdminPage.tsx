@@ -13,7 +13,7 @@ function AdminPage() {
 
     return questions.slice(start, end);
   }
-  const handleChangePage = (event: unknown, newPage: number) => {
+  const handleChangePage = (_event: unknown, newPage: number) => {
     setTablePage(newPage);
   }
 
