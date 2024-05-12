@@ -1,8 +1,12 @@
-FROM node:20.11-alpine
+FROM node:20.11-alpine AS build
 WORKDIR /app
-COPY package.json .
-RUN npm i
+COPY package*.json .
+RUN npm ci
+COPY . .
 RUN npm run build
-COPY ./dist .
-RUN npm i -g serve
-CMD [ "serve", "./dist" ]
+
+FROM nginx:latest as prod
+COPY --from=build /app/dist /usr/share/nginx/html
+COPY nginx.conf /etc/nginx/nginx.conf
+EXPOSE 8080
+CMD ["/usr/sbin/nginx", "-g", "daemon off;"]
