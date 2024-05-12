@@ -1,0 +1,20 @@
+[{
+    "age": 22,
+    "gender": "male",
+    "canRead": "yes",
+    "frame": {
+        "name": "מסגרת כלשהי",
+        "organization": "ארגון כלשהו",
+        "city": "אריאל"
+    }
+},
+{
+    "age": 21,
+    "gender": "male",
+    "canRead": "some",
+    "frame": {
+        "name": "מסגרת אחרת",
+        "organization": "ארגון אחר",
+        "city": "פתח תקווה"
+    }
+}]

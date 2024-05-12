@@ -1,0 +1,26 @@
+[
+    {
+        "userId": {
+            "$oid": "664113acbb44e2c248032e0e"
+        },
+        "questionId": {
+            "$oid": "6641124cbb44e2c248032e08"
+        },
+        "selectedAnswer": 0,
+        "type": "image",
+        "wasCorrect": false,
+        "secondsTaken": 7.099
+    },
+    {
+        "userId": {
+            "$oid": "664113acbb44e2c248032e0e"
+        },
+        "questionId": {
+            "$oid": "6641124cbb44e2c248032e09"
+        },
+        "selectedAnswer": 2,
+        "type": "image",
+        "wasCorrect": true,
+        "secondsTaken": 3.4
+    }
+]

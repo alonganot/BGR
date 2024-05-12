@@ -1,0 +1,48 @@
+[
+    {
+        "number": 1,
+        "title": "בנק",
+        "options": [
+            {
+                "url": "https://www.kshalem.org.il/wp-content/uploads/2024/04/2%D7%91%D7%A0%D7%A7.jpg",
+                "type": "image"
+            },
+            {
+                "url": "https://www.kshalem.org.il/wp-content/uploads/2024/04/2%D7%91%D7%A0%D7%A7.jpg",
+                "type": "icon"
+            },
+            {
+                "url": "https://www.kshalem.org.il/wp-content/uploads/2024/04/2%D7%91%D7%A0%D7%A7.jpg",
+                "type": "image"
+            },
+            {
+                "url": "https://www.kshalem.org.il/wp-content/uploads/2024/04/2%D7%91%D7%A0%D7%A7.jpg",
+                "type": "icon"
+            }
+        ],
+        "correctIndex": 2
+    },
+    {
+        "number": 2,
+        "title": "מרפאה",
+        "options": [
+            {
+                "url": "https://www.kshalem.org.il/wp-content/uploads/2024/04/2%D7%91%D7%A0%D7%A7.jpg",
+                "type": "image"
+            },
+            {
+                "url": "https://www.kshalem.org.il/wp-content/uploads/2024/04/2%D7%91%D7%A0%D7%A7.jpg",
+                "type": "icon"
+            },
+            {
+                "url": "https://www.kshalem.org.il/wp-content/uploads/2024/04/2%D7%91%D7%A0%D7%A7.jpg",
+                "type": "image"
+            },
+            {
+                "url": "https://www.kshalem.org.il/wp-content/uploads/2024/04/2%D7%91%D7%A0%D7%A7.jpg",
+                "type": "icon"
+            }
+        ],
+        "correctIndex": 0
+    }
+]
