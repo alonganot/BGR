@@ -2,6 +2,7 @@ import {
   createBrowserRouter,
   RouterProvider,
 } from "react-router-dom";
+import { QueryClient, QueryClientProvider } from 'react-query'
 
 import AdminPage from './pages/AdminPage.tsx'
 import HomePage from "./pages/HomePage.tsx";
@@ -12,7 +13,10 @@ import NotFoundPage from "./pages/NotFoundPage.tsx";
 import { UserProvider } from "./context/UserContext.tsx";
 import FormPage from "./pages/FormPage.tsx";
 
-function App() {  
+function App() {
+
+  const queryClient = new QueryClient()
+
   const router = createBrowserRouter([
     {
       path: "/",
@@ -37,11 +41,13 @@ function App() {
   ]);
 
   return (
-    <Box sx={{width: '100vw', height: '100vh', margin: 0, padding: 0}}>
-      <UserProvider>
-        <Navbar />
-        <RouterProvider router={router} />
-      </UserProvider>
+    <Box sx={{ width: '100vw', height: '100vh', margin: 0, padding: 0 }}>
+      <QueryClientProvider client={queryClient}>
+        <UserProvider>
+          <Navbar />
+          <RouterProvider router={router} />
+        </UserProvider>
+      </QueryClientProvider>
     </Box>
   )
 }

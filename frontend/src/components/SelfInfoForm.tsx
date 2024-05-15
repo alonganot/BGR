@@ -9,7 +9,7 @@ import { useUserContext } from '../context/UserContext';
 
 function SelfInfoForm() {
     const { user, setUser } = useUserContext();
-    const MIN_AGE = 5
+    const MIN_AGE = 0
 
     const changeGender = (event: SelectChangeEvent) => {
         setUser({...user, gender: event.target.value as string});
@@ -34,8 +34,8 @@ function SelfInfoForm() {
                     required
                     value={user.age}
                     onChange={changeAge}
-                    error={user.age < MIN_AGE}
-                    helperText={user.age< MIN_AGE ? `לא ניתן לבצע את הסקר מתחת לגיל ${MIN_AGE}`: ''}
+                    error={user.age <= MIN_AGE}
+                    helperText={user.age <= MIN_AGE ? 'גיל לא תקין': ''}
                 />
                 <FormLabel id="gender-label">מין</FormLabel>
                 <RadioGroup

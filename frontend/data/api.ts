@@ -7,16 +7,16 @@ export const api = () => {
     return {
         users() {
             return {
-                // async getById(id: string): Promise<() => User> {
-                //     const res = await axios.get(`${process.env.REACT_APP_SERVER_URL}/user/${id}`)
+                // async getById(id: string): Promise<User> {
+                //     const res = await axios.get(`${import.meta.env.VITE_SERVER_URL}/user/${id}`)
                 //     console.log(res?.data);
                 //     return res?.data
                 // },
-                async create(user: User): Promise<() => string> {
+                async create(user: User): Promise<string> {
                     try {
                         const res = await axios({
                             method: 'post',
-                            url: `${process.env.REACT_APP_SERVER_URL}/users`,
+                            url: `${import.meta.env.VITE_SERVER_URL}/users`,
                             headers: {},
                             data: {
                                 user
@@ -26,16 +26,16 @@ export const api = () => {
                         return res?.data.id
                     } catch (error) {
                         console.log(error)
+                        return ''
                     }
                 }
             }
         },
         questions() {
             return {
-                async getAll(): Promise<() => Question[]> {
+                async getAll(): Promise<Question[]> {
                     try {
-                        const res = await axios.get(`${process.env.REACT_APP_SERVER_URL}/questions`)
-                        console.log(res?.data);
+                        const res = await axios.get(`${import.meta.env.VITE_SERVER_URL}/questions`)
                         return res?.data
                     } catch (error) {
                         console.log(error)
@@ -46,15 +46,15 @@ export const api = () => {
         },
         answers() {
             return {
-                async getAll(): Promise<() => Answer[]> {
-                    const res = await axios.get(`${process.env.REACT_APP_SERVER_URL}/answers`)
+                async getAll(): Promise<Answer[]> {
+                    const res = await axios.get(`${import.meta.env.VITE_SERVER_URL}/answers`)
                     console.log(res?.data);
                     return res?.data
                 },
                 async addAnswers(answers: Answer[]): Promise<() => number> {
                     const res = await axios({
                         method: 'post',
-                        url: `${process.env.REACT_APP_SERVER_URL}/answers`,
+                        url: `${import.meta.env.VITE_SERVER_URL}/answers`,
                         headers: {},
                         data: {
                             answers
