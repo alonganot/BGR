@@ -1,5 +1,8 @@
 [
     {
+	"_id": {
+            "$oid": "6641124cbb44e2c248032e08"
+        },
         "number": 1,
         "title": "בנק",
         "options": [
@@ -23,6 +26,9 @@
         "correctIndex": 2
     },
     {
+	"_id": {
+            "$oid": "6641124cbb44e2c248032e09"
+        },
         "number": 2,
         "title": "מרפאה",
         "options": [

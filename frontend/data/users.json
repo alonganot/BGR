@@ -1,4 +1,7 @@
-[{
+[{  
+    "_id": {
+       "$oid": "664113acbb44e2c248032e0e"
+    },
     "age": 22,
     "gender": "male",
     "canRead": "yes",
@@ -9,6 +12,9 @@
     }
 },
 {
+    "_id": {
+       "$oid": "664113acbb44e2c248032e0e"
+    },
     "age": 21,
     "gender": "male",
     "canRead": "some",
