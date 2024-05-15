@@ -3,11 +3,16 @@ import { Link, useNavigate } from "react-router-dom"
 import SelfInfoForm from "../components/SelfInfoForm"
 import FrameInfoForm from "../components/FrameInfoForm"
 import { useUserContext } from "../context/UserContext";
+import { api } from "../../data/api";
 
 function DetailsPage() {
   const navigate = useNavigate();
   const { user } = useUserContext();
 
+  const createUser = async () => {
+    await api().users().create(user)
+    navigate("/form")
+  }
 
   const isFormFilled = (): boolean => {
     return user.age > 0 && user.gender !== '' && user.canRead !== ''
@@ -31,7 +36,7 @@ function DetailsPage() {
         </Grid>
       </Grid>
       <Button variant="contained" color="success"
-        disabled={!isFormFilled()} onClick={() => navigate("/form")}>לתחילת הסקר</Button>
+        disabled={!isFormFilled()} onClick={createUser}>לתחילת הסקר</Button>
     </>
   )
 }

@@ -1,15 +1,25 @@
-import { Button, Grid, Pagination } from "@mui/material";
-import { ChangeEvent, useState } from "react";
-import { Link } from "react-router-dom";
+import { Button, Grid } from "@mui/material";
+import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { TopCenterTitle } from "../styles/SharedStyles";
 import QuestionCard from "../components/QuestionCard";
 import { api } from "../../data/api";
 import { useQuery } from "react-query";
+import { useUserContext } from "../context/UserContext";
 
 function FormPage() {
+  const navigate = useNavigate();
+  const {answers} = useUserContext()
+
   const [page, setPage] = useState(1);
-  const changePage = (_event: ChangeEvent<unknown>, page: number) => {
-    setPage(page);
+  const nextPage = () => {
+    setPage(page + 1);
+  };
+
+  const finishForm = () => {
+    console.log(answers)
+    alert("תודה רבה על המענה!")
+    navigate("/")
   };
 
   const { data, isLoading } = useQuery('getAllQuestions', () => api().questions().getAll());
@@ -17,7 +27,10 @@ function FormPage() {
   return (
     <>
       <Grid container>
-        <Grid item xs={2} />
+        <Grid item xs={2} sx={{ alignSelf: 'end' }}>
+          {(data && page < data.length) && <Button variant="contained" onClick={nextPage}>לשאלה הבאה</Button> }
+          {(data && page === data.length) && <Button variant="contained" color="success" onClick={finishForm}>לסיום הסקר</Button> }
+        </Grid>
         <Grid item xs={8}>
           <TopCenterTitle height={10} variant="h5">
             אני מראה לך ארבע תמונות
@@ -44,11 +57,6 @@ function FormPage() {
           <Button variant="outlined">
             <Link to="/">חזרה לדף הבית</Link>
           </Button>
-          <Pagination
-            page={page}
-            onChange={changePage}
-            count={data?.length}
-          />
         </Grid>
       </Grid>
     </>
