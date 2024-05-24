@@ -11,7 +11,7 @@ import { MongooseModule } from '@nestjs/mongoose';
     UsersModule,
     QuestionsModule,
     AnswersModule,
-    MongooseModule.forRoot('mongodb://localhost:27017/BGR'),
+    MongooseModule.forRoot('mongodb+srv://alonga:password12321@alonga.zyoscl0.mongodb.net/BGR'),
   ],
   controllers: [AppController],
   providers: [AppService],
