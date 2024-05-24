@@ -2,14 +2,15 @@ import { Button, Icon, TableCell, TableRow, Input } from '@mui/material'
 import { ChangeEvent, useState } from 'react';
 import { Question } from '../types/Question';
 import EditQuestionOptions from './EditQuestionOptions';
+import { api } from '../../data/api';
 
 function QuestionRow({ question }: { question: Question }) {
     const [isTitleEditable, setIsTitleEditable] = useState<boolean>(false);
     const [edittedTitle, setEdittedTitle] = useState<string>(question.title)
 
     const changeIsTitleEditable = () => {
-        if (isTitleEditable && edittedTitle !== question.title){
-            console.log(question.title + ' should be changed to ' + edittedTitle);
+        if (isTitleEditable && edittedTitle !== question.title) {
+            api().questions().changeTitleById(question._id, edittedTitle)
         }
 
         setIsTitleEditable(!isTitleEditable);
@@ -17,6 +18,10 @@ function QuestionRow({ question }: { question: Question }) {
 
     const changeEdittedTitle = (event: ChangeEvent<HTMLInputElement>) => {
         setEdittedTitle(event.target.value)
+    }
+
+    const deleteQuestion = () => {
+        api().questions().deleteOne(question)
     }
 
     return (
@@ -32,7 +37,7 @@ function QuestionRow({ question }: { question: Question }) {
                 </Button>
             </TableCell>
             <TableCell align="right">{question.number}</TableCell>
-            <TableCell align="right" sx={{maxWidth: '6.8vw'}}>
+            <TableCell align="right" sx={{ maxWidth: '6.8vw' }}>
                 <Button onClick={changeIsTitleEditable}>
                     {isTitleEditable ? <Icon color='success'>check</Icon> : <Icon>edit</Icon>}
                 </Button>
@@ -42,7 +47,7 @@ function QuestionRow({ question }: { question: Question }) {
                 <EditQuestionOptions question={question} />
             </TableCell>
             <TableCell align="right">
-                <Button color="error">
+                <Button color="error" onClick={deleteQuestion}>
                     <Icon>delete</Icon>
                 </Button>
             </TableCell>

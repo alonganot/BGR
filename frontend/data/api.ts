@@ -41,7 +41,47 @@ export const api = () => {
                         console.log(error)
                         return []
                     }
-                }
+                },
+                async deleteOne(question: Question): Promise<void> {
+                    try {
+                        await axios.delete(`${import.meta.env.VITE_SERVER_URL}/questions/${question._id}`)
+                    } catch (error) {
+                        console.log(error)
+                        throw error
+                    }
+                },
+                async changeTitleById(id: string, title: string): Promise<void> {
+                    try {
+                        await axios.patch(`${import.meta.env.VITE_SERVER_URL}/questions/${id}/${title}`)
+                    } catch (error) {
+                        console.log(error)
+                        throw error
+                    }
+                },
+                async changeQuestionOptionURL(id: string, index: number, url: string): Promise<void> {
+                    try {
+                        await axios.patch(`${import.meta.env.VITE_SERVER_URL}/questions/${id}/${index}/url/${url}`)
+                    } catch (error) {
+                        console.log(error)
+                        throw error
+                    }
+                },
+                async changeQuestionOptionType(id: string, index: number, type: string): Promise<void> {
+                    try {
+                        await axios.patch(`${import.meta.env.VITE_SERVER_URL}/questions/${id}/${index}/type/${type}`)
+                    } catch (error) {
+                        console.log(error)
+                        throw error
+                    }
+                },
+                async swapQuestionNumbers(firstNum: number, secondNum: number): Promise<void> {
+                    try {
+                        await axios.patch(`${import.meta.env.VITE_SERVER_URL}/questions/number/${firstNum}/${secondNum}`)
+                    } catch (error) {
+                        console.log(error)
+                        throw error
+                    }
+                },
             }
         },
         answers() {

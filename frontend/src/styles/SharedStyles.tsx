@@ -26,5 +26,6 @@ export const modalStyle = {
   width: 700,
   bgcolor: 'background.paper',
   boxShadow: '0.5em 0.5em 1em rgb(74 72 72 / 60%)',
+  align: 'center',
   p: 4,
 }
