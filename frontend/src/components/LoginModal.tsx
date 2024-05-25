@@ -3,9 +3,11 @@ import { ChangeEvent, useState } from "react";
 import { modalStyle } from "../styles/SharedStyles";
 import { api } from "../../data/api";
 import { useNavigate } from "react-router-dom";
+import { useAuthContext } from "../context/AuthContext";
 
 function LoginModal() {
     const navigate = useNavigate();
+    const { login } = useAuthContext();
 
     const [isOpen, setIsOpen] = useState<boolean>(false);
 
@@ -24,6 +26,7 @@ function LoginModal() {
         const res = await api().users().verify(password)
 
         if (res.statusCode === 200) {
+            login()
             navigate('/admin')
         } else if (res.statusCode === 401) {
             setErrorMessage('סיסמה שגויה, נסו שנית')

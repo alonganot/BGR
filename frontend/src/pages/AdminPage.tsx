@@ -9,8 +9,11 @@ import { Link } from "react-router-dom"
 import { api } from "../../data/api";
 import { Title } from "../styles/SharedStyles";
 import QuestionRow from "../components/QuestionRow";
+import { useAuthContext } from "../context/AuthContext";
 
 function AdminPage() {
+  const { logout } = useAuthContext();
+
   const ROWS_PER_TABLE_PAGE = 5;
   const [tablePage, setTablePage] = useState<number>(0);
   const { data, isLoading } = useQuery('getAllQuestions', () => api().questions().getAll());
@@ -30,7 +33,7 @@ function AdminPage() {
       <Grid container>
         <Grid item xs={10} />
         <Grid item xs={2}>
-          <Button variant="outlined"><Link to="/">חזרה לדף הבית</Link></Button>
+          <Button variant="outlined" onClick={()=> logout()}><Link to="/">חזרה לדף הבית</Link></Button>
         </Grid>
       </Grid>
       {isLoading &&

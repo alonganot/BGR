@@ -12,6 +12,8 @@ import DetailsPage from "./pages/DetailsPage.tsx";
 import NotFoundPage from "./pages/NotFoundPage.tsx";
 import { UserProvider } from "./context/UserContext.tsx";
 import FormPage from "./pages/FormPage.tsx";
+import ProtectedRoute from "./pages/ProtectedRoute.tsx";
+import { AuthProvider } from "./context/AuthContext.tsx";
 
 function App() {
 
@@ -25,7 +27,10 @@ function App() {
     },
     {
       path: "/admin",
-      element: <AdminPage />,
+      element:
+        <ProtectedRoute>
+          <AdminPage />
+        </ProtectedRoute>,
       errorElement: <NotFoundPage />
     },
     {
@@ -43,10 +48,12 @@ function App() {
   return (
     <Box sx={{ width: '100vw', height: '100vh', margin: 0, padding: 0 }}>
       <QueryClientProvider client={queryClient}>
-        <UserProvider>
-          <Navbar />
-          <RouterProvider router={router} />
-        </UserProvider>
+        <AuthProvider>
+          <UserProvider>
+            <Navbar />
+            <RouterProvider router={router} />
+          </UserProvider>
+        </AuthProvider>
       </QueryClientProvider>
     </Box>
   )
