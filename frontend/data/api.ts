@@ -3,20 +3,17 @@ import { User } from "../src/types/User"
 import { Question } from "../src/types/Question"
 import { Answer } from "../src/types/Answer"
 
+const SERVER_URL = import.meta.env.MODE === 'production' ? "https://bgr-backend.fly.dev" : "http://localhost:3000"
+
 export const api = () => {
     return {
         users() {
             return {
-                // async getById(id: string): Promise<User> {
-                //     const res = await axios.get(`${import.meta.env.VITE_SERVER_URL}/user/${id}`)
-                //     console.log(res?.data);
-                //     return res?.data
-                // },
                 async create(user: User): Promise<string> {
                     try {
                         const res = await axios({
                             method: 'post',
-                            url: `${import.meta.env.VITE_SERVER_URL}/users`,
+                            url: `${SERVER_URL}/users`,
                             headers: {},
                             data: {
                                 user
@@ -33,7 +30,7 @@ export const api = () => {
                     try {
                         const res = await axios({
                             method: 'post',
-                            url: `${import.meta.env.VITE_SERVER_URL}/users/login`,
+                            url: `${SERVER_URL}/users/login`,
                             headers: {},
                             data: {
                                 password
@@ -54,7 +51,7 @@ export const api = () => {
             return {
                 async getAll(): Promise<Question[]> {
                     try {
-                        const res = await axios.get(`${import.meta.env.VITE_SERVER_URL}/questions`)
+                        const res = await axios.get(`${SERVER_URL}/questions`)
                         return res?.data
                     } catch (error) {
                         console.log(error)
@@ -63,7 +60,7 @@ export const api = () => {
                 },
                 async deleteOne(question: Question): Promise<void> {
                     try {
-                        await axios.delete(`${import.meta.env.VITE_SERVER_URL}/questions/${question._id}`)
+                        await axios.delete(`${SERVER_URL}/questions/${question._id}`)
                     } catch (error) {
                         console.log(error)
                         throw error
@@ -71,7 +68,7 @@ export const api = () => {
                 },
                 async changeTitleById(id: string, title: string): Promise<void> {
                     try {
-                        await axios.patch(`${import.meta.env.VITE_SERVER_URL}/questions/${id}/${title}`)
+                        await axios.patch(`${SERVER_URL}/questions/${id}/${title}`)
                     } catch (error) {
                         console.log(error)
                         throw error
@@ -79,7 +76,7 @@ export const api = () => {
                 },
                 async changeQuestionOptionURL(id: string, index: number, url: string): Promise<void> {
                     try {
-                        await axios.patch(`${import.meta.env.VITE_SERVER_URL}/questions/${id}/${index}/url/${url}`)
+                        await axios.patch(`${SERVER_URL}/questions/${id}/${index}/url/${url}`)
                     } catch (error) {
                         console.log(error)
                         throw error
@@ -87,7 +84,7 @@ export const api = () => {
                 },
                 async changeQuestionOptionType(id: string, index: number, type: string): Promise<void> {
                     try {
-                        await axios.patch(`${import.meta.env.VITE_SERVER_URL}/questions/${id}/${index}/type/${type}`)
+                        await axios.patch(`${SERVER_URL}/questions/${id}/${index}/type/${type}`)
                     } catch (error) {
                         console.log(error)
                         throw error
@@ -95,7 +92,7 @@ export const api = () => {
                 },
                 async swapQuestionNumbers(firstNum: number, secondNum: number): Promise<void> {
                     try {
-                        await axios.patch(`${import.meta.env.VITE_SERVER_URL}/questions/number/${firstNum}/${secondNum}`)
+                        await axios.patch(`${SERVER_URL}/questions/number/${firstNum}/${secondNum}`)
                     } catch (error) {
                         console.log(error)
                         throw error
@@ -106,14 +103,14 @@ export const api = () => {
         answers() {
             return {
                 async getAll(): Promise<Answer[]> {
-                    const res = await axios.get(`${import.meta.env.VITE_SERVER_URL}/answers`)
+                    const res = await axios.get(`${SERVER_URL}/answers`)
                     console.log(res?.data);
                     return res?.data
                 },
                 async addAnswers(answers: Answer[]): Promise<() => number> {
                     const res = await axios({
                         method: 'post',
-                        url: `${import.meta.env.VITE_SERVER_URL}/answers`,
+                        url: `${SERVER_URL}/answers`,
                         headers: {},
                         data: {
                             answers

@@ -1,12 +1,15 @@
-app = 'bgr-kshalem'
+# fly.toml app configuration file generated for bgr-backend on 2024-05-25T16:35:13+03:00
+#
+# See https://fly.io/docs/reference/configuration/ for information about how to use this file.
+#
+
+app = 'bgr-backend'
 primary_region = 'cdg'
 
 [build]
-  dockerfile = 'Dockerfile'
-  ignorefile = '.dockerignore'
 
 [http_service]
-  internal_port = 8080
+  internal_port = 3000
   force_https = true
   auto_stop_machines = true
   auto_start_machines = true

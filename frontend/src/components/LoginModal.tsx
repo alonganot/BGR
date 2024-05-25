@@ -48,7 +48,7 @@ function LoginModal() {
                     <Typography dir='rtl' variant="h5" align='center' sx={{ marginBottom: '2vh' }}>
                         ברוכים הבאים
                     </Typography>
-                    <Box display={'flex'} justifyContent={'center'}>'
+                    <Box display={'flex'} justifyContent={'center'}>
                         <Button variant="outlined" color="success" sx={{ marginRight: '1vw' }} onClick={verifyPassword}>
                             כניסה</Button>
                         <TextField
