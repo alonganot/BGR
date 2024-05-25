@@ -5,7 +5,7 @@ import { User } from 'src/entities/user.entity';
 
 @Injectable()
 export class UsersService {
-  constructor(@InjectModel(User.name) private userModel: Model<User>) {}
+  constructor(@InjectModel(User.name) private userModel: Model<User>) { }
 
   async add(userToAdd) {
     try {
@@ -14,6 +14,10 @@ export class UsersService {
     } catch {
       return 'failed save';
     }
+  }
+
+  verify(password) {
+    return password === 'kshalem2024'
   }
 
   findAll() {

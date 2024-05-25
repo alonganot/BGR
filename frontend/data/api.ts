@@ -28,6 +28,25 @@ export const api = () => {
                         console.log(error)
                         return ''
                     }
+                },
+                async verify(password: string): Promise<{statusCode: number, message: string}> {
+                    try {
+                        const res = await axios({
+                            method: 'post',
+                            url: `${import.meta.env.VITE_SERVER_URL}/users/login`,
+                            headers: {},
+                            data: {
+                                password
+                            }
+                        });
+                        return res?.data
+                    } catch (error: any) {
+                        if (error.response) {
+                            return {statusCode: error.response.status, message: error.response.statusText}
+                        } else {
+                            return {statusCode: 500, message: 'Server error'}
+                        }
+                    }
                 }
             }
         },

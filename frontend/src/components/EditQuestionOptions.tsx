@@ -44,7 +44,7 @@ function EditQuestionOptions({ question }: { question: Question }) {
                 aria-labelledby="modal-modal-title"
                 aria-describedby="modal-modal-description"
             >
-                <Box sx={modalStyle}>
+                <Box sx={modalStyle(700)}>
                     <Typography dir='rtl' variant="h4" component="h2" align='center'>
                         {question.title}
                     </Typography>

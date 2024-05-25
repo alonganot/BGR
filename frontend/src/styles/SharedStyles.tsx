@@ -18,14 +18,17 @@ export const Subtitle = styled(Typography)({
   maxWidth: '35vw'
 })
 
-export const modalStyle = {
-  position: 'absolute' as 'absolute',
-  top: '50%',
-  left: '50%',
-  transform: 'translate(-50%, -50%)',
-  width: 700,
-  bgcolor: 'background.paper',
-  boxShadow: '0.5em 0.5em 1em rgb(74 72 72 / 60%)',
-  align: 'center',
-  p: 4,
+export const modalStyle = (width: number) => {
+  return {
+    position: 'absolute' as 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    width: width,
+    bgcolor: 'background.paper',
+    borderRadius: '15px',
+    boxShadow: '0.5em 0.5em 1em rgb(74 72 72 / 60%)',
+    align: 'center',
+    p: 4,
+  }
 }
