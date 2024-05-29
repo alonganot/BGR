@@ -22,6 +22,11 @@ export class QuestionsController {
     return this.questionsService.findOne(+id);
   }
 
+  @Post()
+  create(@Body() newQuestion) {
+    return this.questionsService.create(newQuestion);
+  }
+
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateQuestionDto) {
     return this.questionsService.update(+id, updateQuestionDto);

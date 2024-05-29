@@ -26,7 +26,7 @@ export const api = () => {
                         return ''
                     }
                 },
-                async verify(password: string): Promise<{statusCode: number, message: string}> {
+                async verify(password: string): Promise<{ statusCode: number, message: string }> {
                     try {
                         const res = await axios({
                             method: 'post',
@@ -39,9 +39,9 @@ export const api = () => {
                         return res?.data
                     } catch (error: any) {
                         if (error.response) {
-                            return {statusCode: error.response.status, message: error.response.statusText}
+                            return { statusCode: error.response.status, message: error.response.statusText }
                         } else {
-                            return {statusCode: 500, message: 'Server error'}
+                            return { statusCode: 500, message: 'Server error' }
                         }
                     }
                 }
@@ -98,6 +98,19 @@ export const api = () => {
                         throw error
                     }
                 },
+                async add(question: Question): Promise<() => number> {
+                    const res = await axios({
+                        method: 'post',
+                        url: `${SERVER_URL}/questions`,
+                        headers: {},
+                        data: {
+                            question
+                        }
+                    });
+                    console.log(res?.data);
+
+                    return res?.data.count
+                }
             }
         },
         answers() {

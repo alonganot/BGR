@@ -10,6 +10,7 @@ import { api } from "../../data/api";
 import { Title } from "../styles/SharedStyles";
 import QuestionRow from "../components/QuestionRow";
 import { useAuthContext } from "../context/AuthContext";
+import AddQuestionModal from "../components/AddQuestionModal";
 
 function AdminPage() {
   const { logout } = useAuthContext();
@@ -33,6 +34,7 @@ function AdminPage() {
       <Grid container>
         <Grid item xs={10} />
         <Grid item xs={2}>
+          {data && <AddQuestionModal questionTitles={data?.map(question => question.title)} />}
           <Button variant="outlined" onClick={()=> logout()}><Link to="/">חזרה לדף הבית</Link></Button>
         </Grid>
       </Grid>

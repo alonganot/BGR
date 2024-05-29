@@ -5,14 +5,26 @@ import { Question } from 'src/entities/question.entity';
 
 @Injectable()
 export class QuestionsService {
-  constructor(@InjectModel(Question.name) private userModel: Model<Question>) {};
+  constructor(@InjectModel(Question.name) private questionModel: Model<Question>) { };
 
-  create(createQuestionDto) {
-    return 'This action adds a new question';
+  async create(questionToAdd) {
+    try {
+      const { question } = questionToAdd
+
+      const questionsLength = await this.questionModel.countDocuments({})
+      delete question._id
+
+      const finalQuestion: Question = { ...question, number: questionsLength + 1 }
+
+      const newQuestion = await this.questionModel.create(finalQuestion);
+      newQuestion.save();
+    } catch {
+      return 'failed save';
+    }
   }
 
   findAll() {
-    return this.userModel.find({}).exec();
+    return this.questionModel.find({}).exec();
   }
 
   findOne(id: number) {

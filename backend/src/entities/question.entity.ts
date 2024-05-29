@@ -16,8 +16,11 @@ export class Question {
   @Prop()
   number: number;
 
+  @Prop()
+  title: string;
+
   @Prop({ type: Array })
-  Options: Option[];
+  options: Option[];
 
   @Prop()
   correctIndex: number;
