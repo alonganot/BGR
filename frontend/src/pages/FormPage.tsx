@@ -7,10 +7,11 @@ import { api } from "../../data/api";
 import { useQuery } from "react-query";
 import { useUserContext } from "../context/UserContext";
 import { usePreloadedImages } from "../context/PreLoadImagesContext";
+import { defaultUser } from "../context/UserContext";
 
 function FormPage() {
   const navigate = useNavigate();
-  const {answers} = useUserContext()
+  const {answers, setUser} = useUserContext()
 
   const [page, setPage] = useState(1);
   const nextPage = () => {
@@ -22,6 +23,7 @@ function FormPage() {
     console.log(answers)
     alert("תודה רבה על המענה!")
     navigate("/")
+    setUser(defaultUser)
   };
 
   const { data, isLoading } = useQuery('getAllQuestions', () => api().questions().getAll());

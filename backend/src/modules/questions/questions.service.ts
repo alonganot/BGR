@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { Question } from 'src/entities/question.entity';
@@ -27,15 +27,29 @@ export class QuestionsService {
     return this.questionModel.find({}).exec();
   }
 
-  findOne(id: number) {
+  findOne(id: string) {
     return `This action returns a #${id} question`;
   }
 
-  update(id: number, updateQuestionDto) {
+  update(id: string, updateQuestionDto) {
     return `This action updates a #${id} question`;
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} question`;
-  }
+  async remove(id: string) {
+    const questionToRemove = await this.questionModel.findById(id);
+    if (!questionToRemove) {
+      throw new NotFoundException(`Question with ID ${id} not found`);
+    }
+
+    const questionNumber = questionToRemove.number;
+
+    await this.questionModel.deleteOne({ _id: id }).exec();
+
+    await this.questionModel.updateMany(
+      { number: { $gt: questionNumber } },
+      { $inc: { number: -1 } }
+    ).exec();
+
+    return `Question #${id} successfully removed and remaining questions renumbered`;
+  }  
 }

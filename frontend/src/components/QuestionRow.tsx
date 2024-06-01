@@ -1,8 +1,9 @@
 import { Button, Icon, TableCell, TableRow, Input } from '@mui/material'
 import { ChangeEvent, useState } from 'react';
+import { api } from '../../data/api';
 import { Question } from '../types/Question';
 import EditQuestionOptions from './EditQuestionOptions';
-import { api } from '../../data/api';
+import DeleteQuestionModal from './DeleteQuestionModal';
 
 function QuestionRow({ question }: { question: Question }) {
     const [isTitleEditable, setIsTitleEditable] = useState<boolean>(false);
@@ -18,10 +19,6 @@ function QuestionRow({ question }: { question: Question }) {
 
     const changeEdittedTitle = (event: ChangeEvent<HTMLInputElement>) => {
         setEdittedTitle(event.target.value)
-    }
-
-    const deleteQuestion = () => {
-        api().questions().deleteOne(question)
     }
 
     return (
@@ -48,9 +45,7 @@ function QuestionRow({ question }: { question: Question }) {
                 <EditQuestionOptions question={question} />
             </TableCell>
             <TableCell align="right">
-                <Button color="error" onClick={deleteQuestion}>
-                    <Icon>delete</Icon>
-                </Button>
+                <DeleteQuestionModal question={question} />
             </TableCell>
         </TableRow>
     )

@@ -11,7 +11,7 @@ interface iUserContext {
 const UserContext = React.createContext<iUserContext | null>(null)
 
 export const useUserContext = () => useContext(UserContext) as iUserContext
-const defaultUser: User = {
+export const defaultUser: User = {
     id: '',
     age: 0,
     gender: '',
