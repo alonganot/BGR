@@ -5,11 +5,13 @@ import { modalStyle } from '../styles/SharedStyles';
 import { api } from '../../data/api';
 
 function AddQuestionModal({ questionTitles, questionNum }: { questionTitles: string[], questionNum: number }) {
-    const [question, setQuestion] = useState<Question>({
+    const emptyQuestion = {
         _id: '', title: '', number: questionNum,
         options: [{ url: '', type: 'icon' }, { url: '', type: 'icon' },
         { url: '', type: 'icon' }, { url: '', type: 'icon' }], correctIndex: 1
-    })
+    }
+
+    const [question, setQuestion] = useState<Question>(emptyQuestion)
     const [isOpen, setIsOpen] = useState(false);
 
     const changeIsOpen = (): void => setIsOpen(!isOpen);
@@ -54,6 +56,7 @@ function AddQuestionModal({ questionTitles, questionNum }: { questionTitles: str
         await api().questions().add(question)
         alert('השאלה התווספה בהצלחה')
         setIsOpen(false)
+        setQuestion(emptyQuestion)
     }
 
     return (
