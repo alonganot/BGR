@@ -48,6 +48,7 @@ function EditQuestionOptions({ question }: { question: Question }) {
                     <Typography dir='rtl' variant="h4" component="h2" align='center' marginBottom={'2vh'}>
                         {question.number}
                         . {question.title}
+                        -{question.options[0].type === 'image' ? ' תמונה' : ' אייקון'}
                     </Typography>
                     <Grid container spacing={2}>
                         {question.options.map((option, index) => (

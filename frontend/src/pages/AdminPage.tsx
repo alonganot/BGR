@@ -47,6 +47,7 @@ function AdminPage() {
               <TableRow>
                 <TableCell align="right">שינוי סדר שאלות</TableCell>
                 <TableCell align="right">מספר שאלה</TableCell>
+                <TableCell align="right">סוג שאלה</TableCell>
                 <TableCell align="right">שם שאלה</TableCell>
                 <TableCell align="right">אפשרויות</TableCell>
                 <TableCell align="right">מחיקת השאלה</TableCell>

@@ -56,6 +56,7 @@ function AddQuestionModal({ questionTitles, questionNum }: { questionTitles: str
         await api().questions().add(question)
         alert('השאלה התווספה בהצלחה')
         setIsOpen(false)
+        setisOptionsEditable(new Array(question.options.length).fill(true))
         setQuestion(emptyQuestion)
     }
 

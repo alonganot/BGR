@@ -37,6 +37,7 @@ function QuestionRow({ question }: { question: Question }) {
                 </Button>
             </TableCell>
             <TableCell align="right">{question.number}</TableCell>
+            <TableCell align="right">{question.options[0].type === 'image' ? 'תמונה' : 'אייקון'}</TableCell>
             <TableCell align="right" sx={{ maxWidth: '6.8vw' }}>
                 <Button onClick={changeIsTitleEditable}>
                     {isTitleEditable ? <Icon color='success'>check</Icon> : <Icon>edit</Icon>}
