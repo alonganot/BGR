@@ -34,11 +34,11 @@ function HomePage() {
           <LoginModal />
         </Grid>
       </Grid>
-      <Box sx={{display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
+      <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
         <Title variant='h3'>{titleText}</Title>
         <Subtitle variant='h4'>{subtitleText}</Subtitle>
       </Box>
-      <Box sx={{paddingTop: '2vh'}}>
+      <Box sx={{ paddingTop: '2vh' }}>
         <Information variant='h6'>{infoText}</Information>
       </Box>
       <Grid container>
@@ -47,7 +47,7 @@ function HomePage() {
         </Grid>
         <Grid item xs={10} />
       </Grid>
-      </>
+    </>
   )
 }
 

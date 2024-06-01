@@ -14,6 +14,7 @@ import { UserProvider } from "./context/UserContext.tsx";
 import FormPage from "./pages/FormPage.tsx";
 import ProtectedRoute from "./pages/ProtectedRoute.tsx";
 import { AuthProvider } from "./context/AuthContext.tsx";
+import { PreloadImagesProvider } from "./context/PreLoadImagesContext.tsx";
 
 function App() {
 
@@ -48,12 +49,14 @@ function App() {
   return (
     <Box sx={{ width: '100vw', height: '100vh', margin: 0, padding: 0 }}>
       <QueryClientProvider client={queryClient}>
+        <PreloadImagesProvider>
         <AuthProvider>
           <UserProvider>
             <Navbar />
             <RouterProvider router={router} />
           </UserProvider>
         </AuthProvider>
+        </PreloadImagesProvider>
       </QueryClientProvider>
     </Box>
   )

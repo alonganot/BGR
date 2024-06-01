@@ -1,11 +1,14 @@
-import { Button, Grid } from "@mui/material"
+import { Button, Grid, Typography } from "@mui/material"
 import { Link, useNavigate } from "react-router-dom"
 import SelfInfoForm from "../components/SelfInfoForm"
 import FrameInfoForm from "../components/FrameInfoForm"
 import { useUserContext } from "../context/UserContext";
 import { api } from "../../data/api";
+import { usePreloadedImages } from "../context/PreLoadImagesContext";
 
 function DetailsPage() {
+  const { loadedImages } = usePreloadedImages()
+
   const navigate = useNavigate();
   const { user } = useUserContext();
 
@@ -35,8 +38,9 @@ function DetailsPage() {
           <SelfInfoForm />
         </Grid>
       </Grid>
+      {loadedImages.length === 0 && <Typography variant="h5">התמונות נטענות, בקרוב תוכלו להתחיל</Typography>}
       <Button variant="contained" color="success"
-        disabled={!isFormFilled()} onClick={createUser}>לתחילת הסקר</Button>
+        disabled={!isFormFilled() || loadedImages.length === 0} onClick={createUser}>לתחילת הסקר</Button>
     </>
   )
 }

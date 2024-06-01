@@ -6,6 +6,7 @@ import QuestionCard from "../components/QuestionCard";
 import { api } from "../../data/api";
 import { useQuery } from "react-query";
 import { useUserContext } from "../context/UserContext";
+import { usePreloadedImages } from "../context/PreLoadImagesContext";
 
 function FormPage() {
   const navigate = useNavigate();
@@ -13,6 +14,7 @@ function FormPage() {
 
   const [page, setPage] = useState(1);
   const nextPage = () => {
+    setAnswerPicked(false)
     setPage(page + 1);
   };
 
@@ -24,11 +26,19 @@ function FormPage() {
 
   const { data, isLoading } = useQuery('getAllQuestions', () => api().questions().getAll());
 
+  const { loadedImages } = usePreloadedImages();
+
+  const [answerPicked, setAnswerPicked] = useState<boolean>(false)
+
+  const enableNextQuestion = () : void => {
+    setAnswerPicked(true);
+  }
+
   return (
     <>
       <Grid container>
         <Grid item xs={2} sx={{ alignSelf: 'end' }}>
-          {(data && page < data.length) && <Button variant="contained" onClick={nextPage}>לשאלה הבאה</Button> }
+          {(data && page < data.length) && <Button variant="contained" onClick={nextPage} disabled={!answerPicked}>לשאלה הבאה</Button> }
           {(data && page === data.length) && <Button variant="contained" color="success" onClick={finishForm}>לסיום הסקר</Button> }
         </Grid>
         <Grid item xs={8}>
@@ -39,17 +49,18 @@ function FormPage() {
             בבקשה תגיד.י לי באיזו תמונה רואים
           </TopCenterTitle>
           {
-            isLoading && <TopCenterTitle height={20} variant="h5">
+            (isLoading || loadedImages.length === 0) && <TopCenterTitle height={20} variant="h5">
               השאלה נטענת....
             </TopCenterTitle>
           }
-          {data &&
+          {data && loadedImages.length > 0 &&
             <QuestionCard
               key={page}
               questionNum={data[page - 1].number}
               title={data[page - 1].title}
               options={data[page - 1].options}
               correctIndex={data[page - 1].correctIndex}
+              enableNextQuestion={enableNextQuestion}
             />
           }
         </Grid>
