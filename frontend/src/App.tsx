@@ -41,7 +41,10 @@ function App() {
     },
     {
       path: "/form",
-      element: <FormPage />,
+      element:
+        <ProtectedRoute>
+          <FormPage />
+        </ProtectedRoute>,
       errorElement: <NotFoundPage />
     },
   ]);

@@ -73,6 +73,7 @@ function AddQuestionModal({ questionTitles, questionNum }: { questionTitles: str
             >
                 <Box sx={modalStyle(700)} display={'flex'} justifyContent={'center'} alignItems={'center'} flexDirection={'column'}>
                     <Box display={'flex'}>
+                    <Typography variant='h6'>{question.options[0].type === 'image' ? 'תמונה ' : 'אייקון ' }-</Typography>
                         <Input dir='rtl' type="text" value={question.title} onChange={changeQuestionTitle} placeholder='שם השאלה' sx={{ marginBottom: '2vh' }} />
                         <Typography variant='h6'>.{questionNum}</Typography>
                     </Box>

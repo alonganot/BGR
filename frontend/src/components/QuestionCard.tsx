@@ -1,7 +1,7 @@
-import { Button, Card, Grid } from "@mui/material";
+import { Box, Button, Card, Grid, Typography } from "@mui/material";
 import { TopCenterTitle } from "../styles/SharedStyles";
 import { useUserContext } from "../context/UserContext";
-import { useState } from "react";
+import { Fragment, useState } from "react";
 import { Option } from "../types/Option";
 import { usePreloadedImages } from "../context/PreLoadImagesContext";
 
@@ -44,30 +44,36 @@ function QuestionCard({
 
   return (
     <>
-      <TopCenterTitle height={20} variant="h4">
+      <TopCenterTitle height={2} variant="h4">
         {title}
       </TopCenterTitle>
-      <Grid container rowSpacing={"10vh"}>
+      <Grid container rowSpacing={"5vh"} position={'fixed'} top={'10%'} left={'0%'}>
         {options.map((option, index) => (
-          <Grid key={index} container justifyContent={"center"} item xs={6}>
-            <Card key={index}>
-              <Button
-                size="small"
-                sx={{ width: '250px' }}
-                onClick={() => {
-                  validateAnswer(index);
-                }}
-              >
-                <>
-                  <img src="/loading.gif" style={loaded ? { display: "none", width: '250px', height: '200px' } : { width: '250px', height: '200px' }} />
-                  <img src={loadedImages.find(url => url === option.url)} onLoad={showImage} style={loaded ? { width: '250px', height: '200px' } : { display: "none", width: '250px', height: '200px' }} />
-                </>
-              </Button>
-            </Card>
-          </Grid>
+          <Fragment key={index}>
+            {index % 2 === 0 && <Grid item xs={2} />}
+            {index === 2 && <Grid item xs={2} />}
+            <Grid container justifyContent={"center"} item xs={4}>
+              <Card>
+                <Button
+                  sx={{ width: '400px' }}
+                  onClick={() => {
+                    validateAnswer(index);
+                  }}
+                >
+                  <>
+                    <img src="/loading.gif" style={loaded ? { display: "none", width: '300px', height: '250px' } : { width: '300px', height: '300px' }} />
+                    <img src={loadedImages.find(url => url === option.url)} onLoad={showImage} style={loaded ? { width: '400px', height: '270px' } : { display: "none", width: '300px', height: '250px' }} />
+                  </>
+                </Button>
+              </Card>
+            </Grid>
+          </Fragment>
         ))}
+        <Grid item xs={2} />
       </Grid>
-      <div>שאלה {questionNum}</div>
+      <Box display={'flex'} justifyContent={'center'} height={'100%'} alignItems={'self-end'}>
+        <Typography>שאלה {questionNum}</Typography>
+      </Box>
     </>
   );
 }

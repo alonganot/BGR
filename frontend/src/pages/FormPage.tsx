@@ -36,20 +36,14 @@ function FormPage() {
 
   return (
     <>
-      <Grid container>
-        <Grid item xs={2} sx={{ alignSelf: 'end' }}>
+      <Grid container height={'70%'}>
+        <Grid item xs={2} sx={{ alignSelf: 'end', zIndex:'4' }}>
           {(data && page < data.length) && <Button variant="contained" onClick={nextPage} disabled={!answerPicked}>לשאלה הבאה</Button> }
           {(data && page === data.length) && <Button variant="contained" color="success" onClick={finishForm}>לסיום הסקר</Button> }
         </Grid>
         <Grid item xs={8}>
-          <TopCenterTitle height={10} variant="h5">
-            אני מראה לך ארבע תמונות
-          </TopCenterTitle>
-          <TopCenterTitle height={15} variant="h5">
-            בבקשה תגיד.י לי באיזו תמונה רואים
-          </TopCenterTitle>
           {
-            (isLoading || loadedImages.length === 0) && <TopCenterTitle height={20} variant="h5">
+            (isLoading || loadedImages.length === 0) && <TopCenterTitle height={10} variant="h5">
               השאלה נטענת....
             </TopCenterTitle>
           }
