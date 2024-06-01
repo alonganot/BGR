@@ -4,9 +4,9 @@ import { ChangeEvent, useState } from 'react';
 import { modalStyle } from '../styles/SharedStyles';
 import { api } from '../../data/api';
 
-function AddQuestionModal({questionTitles}: {questionTitles: string[]}) {
+function AddQuestionModal({ questionTitles, questionNum }: { questionTitles: string[], questionNum: number }) {
     const [question, setQuestion] = useState<Question>({
-        _id: '', title: '', number: 0,
+        _id: '', title: '', number: questionNum,
         options: [{ url: '', type: 'icon' }, { url: '', type: 'icon' },
         { url: '', type: 'icon' }, { url: '', type: 'icon' }], correctIndex: 1
     })
@@ -46,7 +46,7 @@ function AddQuestionModal({questionTitles}: {questionTitles: string[]}) {
 
     const isQuestionReady = () => {
         return question.title.length > 0 && question.options.filter(option => option.url.length === 0).length === 0
-        && !questionTitles.includes(question.title)
+            && !questionTitles.includes(question.title)
     }
 
     const addQuestion = async () => {
@@ -68,7 +68,10 @@ function AddQuestionModal({questionTitles}: {questionTitles: string[]}) {
                 aria-describedby="modal-modal-description"
             >
                 <Box sx={modalStyle(700)} display={'flex'} justifyContent={'center'} alignItems={'center'} flexDirection={'column'}>
-                    <Input dir='rtl' type="text" value={question.title} onChange={changeQuestionTitle} placeholder='שם השאלה' sx={{ marginBottom: '2vh' }} />
+                    <Box display={'flex'}>
+                        <Input dir='rtl' type="text" value={question.title} onChange={changeQuestionTitle} placeholder='שם השאלה' sx={{ marginBottom: '2vh' }} />
+                        <Typography variant='h6'>.{questionNum}</Typography>
+                    </Box>
                     {questionTitles.includes(question.title) && <Typography color={'error'}>השם תפוס</Typography>}
                     <Grid container spacing={2}>
                         {question.options.map((option, index) => (

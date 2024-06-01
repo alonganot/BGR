@@ -47,7 +47,7 @@ function App() {
   ]);
 
   return (
-    <Box sx={{ width: '100vw', height: '100vh', margin: 0, padding: 0 }}>
+    <Box sx={{ width: '98vw', height: '100vh', margin: 0, padding: 0 }}>
       <QueryClientProvider client={queryClient}>
         <PreloadImagesProvider>
         <AuthProvider>

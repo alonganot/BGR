@@ -15,7 +15,7 @@ import AddQuestionModal from "../components/AddQuestionModal";
 function AdminPage() {
   const { logout } = useAuthContext();
 
-  const ROWS_PER_TABLE_PAGE = 5;
+  const ROWS_PER_TABLE_PAGE = 20;
   const [tablePage, setTablePage] = useState<number>(0);
   const { data, isLoading } = useQuery('getAllQuestions', () => api().questions().getAll());
 
@@ -34,7 +34,7 @@ function AdminPage() {
       <Grid container>
         <Grid item xs={10} />
         <Grid item xs={2}>
-          {data && <AddQuestionModal questionTitles={data?.map(question => question.title)} />}
+          {data && <AddQuestionModal questionTitles={data.map(question => question.title)} questionNum={data.length + 1} />}
           <Button variant="outlined" onClick={()=> logout()}><Link to="/">חזרה לדף הבית</Link></Button>
         </Grid>
       </Grid>

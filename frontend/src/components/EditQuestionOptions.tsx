@@ -45,8 +45,9 @@ function EditQuestionOptions({ question }: { question: Question }) {
                 aria-describedby="modal-modal-description"
             >
                 <Box sx={modalStyle(700)}>
-                    <Typography dir='rtl' variant="h4" component="h2" align='center'>
-                        {question.title}
+                    <Typography dir='rtl' variant="h4" component="h2" align='center' marginBottom={'2vh'}>
+                        {question.number}
+                        . {question.title}
                     </Typography>
                     <Grid container spacing={2}>
                         {question.options.map((option, index) => (
