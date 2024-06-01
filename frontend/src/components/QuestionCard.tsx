@@ -55,14 +55,15 @@ function QuestionCard({
             <Grid container justifyContent={"center"} item xs={4}>
               <Card>
                 <Button
-                  sx={{ width: '400px' }}
+                  sx={{ width: option.type === 'image' ? '500px' : '400px' }}
                   onClick={() => {
                     validateAnswer(index);
                   }}
                 >
                   <>
-                    <img src="/loading.gif" style={loaded ? { display: "none", width: '300px', height: '250px' } : { width: '300px', height: '300px' }} />
-                    <img src={loadedImages.find(url => url === option.url)} onLoad={showImage} style={loaded ? { width: '400px', height: '270px' } : { display: "none", width: '300px', height: '250px' }} />
+                    <img src="/loading.gif" style={{ display: loaded ? "none" : "", width: '300px', height: '250px' }} />
+                    <img src={loadedImages.find(url => url === option.url)}
+                      onLoad={showImage} style={{ width: option.type === 'image' ? '500px' : '400px', height: '270px', display: loaded ? "" : "none" }} />
                   </>
                 </Button>
               </Card>
@@ -71,7 +72,7 @@ function QuestionCard({
         ))}
         <Grid item xs={2} />
       </Grid>
-      <Box display={'flex'} justifyContent={'center'} height={'100%'} alignItems={'self-end'}>
+      <Box display={'flex'} justifyContent={'center'} height={'102%'} alignItems={'self-end'}>
         <Typography>שאלה {questionNum}</Typography>
       </Box>
     </>
