@@ -32,6 +32,15 @@ export class QuestionsController {
     return this.questionsService.update(id, updateQuestionDto);
   }
 
+  @Patch(':id/index/:index/url')
+  updateUrl(
+    @Param('id') id: string,
+    @Param('index') index: string,
+    @Body('url') url: string,
+  ) {
+    return this.questionsService.updateUrl(id, +index, url);
+  }
+
   @Delete(':id')
   remove(@Param('id') id: string) {
     return this.questionsService.remove(id);

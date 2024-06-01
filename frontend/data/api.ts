@@ -76,7 +76,7 @@ export const api = () => {
                 },
                 async changeQuestionOptionURL(id: string, index: number, url: string): Promise<void> {
                     try {
-                        await axios.patch(`${SERVER_URL}/questions/${id}/${index}/url/${url}`)
+                        await axios.patch(`${SERVER_URL}/questions/${id}/index/${index}/url`, {url: url})
                     } catch (error) {
                         console.log(error)
                         throw error

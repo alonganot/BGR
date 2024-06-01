@@ -51,5 +51,23 @@ export class QuestionsService {
     ).exec();
 
     return `Question #${id} successfully removed and remaining questions renumbered`;
-  }  
+  }
+
+  async updateUrl(id: string, index: number, url: string) {
+    const question = await this.questionModel.findById(id);
+    if (!question) {
+      throw new NotFoundException(`Question with ID ${id} not found`);
+    }
+
+    if (!question.options[index]) {
+      throw new NotFoundException(`Option at index ${index} not found for question with ID ${id}`);
+    }
+
+    question.options[index].url = url;
+    question.markModified('options');
+
+    await question.save();
+
+    return question;
+  }
 }

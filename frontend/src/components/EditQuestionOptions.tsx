@@ -15,9 +15,14 @@ function EditQuestionOptions({ question }: { question: Question }) {
     const [isOptionsEditable, setisOptionsEditable] = useState<boolean[]>(new Array(question.options.length).fill(false));
     const [edittedOptions, setEdittedOptions] = useState<Option[]>(question.options);
 
-    const changeIsOptionEditable = (index: number) => {
+    const changeIsOptionEditable = async (index: number) => {
         if (isOptionsEditable[index] && edittedOptions[index].url !== question.options[index].url) {
-            api().questions().changeQuestionOptionURL(question._id, index, edittedOptions[index].url)
+            try {
+                await api().questions().changeQuestionOptionURL(question._id, index, edittedOptions[index].url)
+                question.options[index].url = edittedOptions[index].url
+            } catch (error) {
+                console.log(error);
+            }
         }
 
         setisOptionsEditable([...isOptionsEditable.slice(0, index), !isOptionsEditable[index], ...isOptionsEditable.slice(index + 1)]);
