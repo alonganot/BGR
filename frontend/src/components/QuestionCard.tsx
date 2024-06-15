@@ -45,7 +45,7 @@ function QuestionCard({
   return (
     <>
       <TopCenterTitle height={2} variant="h4">
-        {title}
+        ? באיזה תמונה את.ה רואה {title}
       </TopCenterTitle>
       <Grid container rowSpacing={"5vh"} position={'fixed'} top={'10%'} left={'0%'}>
         {options.map((option, index) => (
