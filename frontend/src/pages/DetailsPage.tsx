@@ -7,6 +7,7 @@ import { api } from "../../data/api";
 import { usePreloadedImages } from "../context/PreLoadImagesContext";
 
 function DetailsPage() {
+  const { clearUser } = useUserContext()
   const { loadedImages } = usePreloadedImages()
 
   const navigate = useNavigate();
@@ -19,7 +20,7 @@ function DetailsPage() {
 
   const isFormFilled = (): boolean => {
     return user.age > 0 && user.gender !== '' && user.canRead !== ''
-          && user.frame.name !== '' && user.frame.organization !== '' && user.frame.city !== ''
+      && user.frame.name !== '' && user.frame.organization !== '' && user.frame.city !== ''
   }
 
   return (
@@ -27,7 +28,7 @@ function DetailsPage() {
       <Grid container>
         <Grid item xs={10} />
         <Grid item xs={2}>
-          <Button variant="outlined"><Link to="/">חזרה לדף הבית</Link></Button>
+          <Button variant="outlined" onClick={clearUser}><Link to="/">חזרה לדף הבית</Link></Button>
         </Grid>
       </Grid>
       <Grid container justifyContent={'space-evenly'}>

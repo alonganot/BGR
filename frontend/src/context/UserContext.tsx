@@ -5,13 +5,14 @@ import { Answer } from "../types/Answer";
 interface iUserContext {
     user: User,
     setUser: Dispatch<SetStateAction<User>>,
+    clearUser: () => void,
     answers: Answer[],
     addAnswer: (answer: Answer) => void
 }
 const UserContext = React.createContext<iUserContext | null>(null)
 
 export const useUserContext = () => useContext(UserContext) as iUserContext
-export const defaultUser: User = {
+const defaultUser: User = {
     id: '',
     age: 0,
     gender: '',
@@ -23,18 +24,22 @@ export const defaultUser: User = {
     }
 }
 
-export const UserProvider = ({ children }: { children: ReactNode}) => {
+export const UserProvider = ({ children }: { children: ReactNode }) => {
     const [user, setUser] = useState(defaultUser);
     const [answers, setAnswers] = useState<Answer[]>([]);
 
     const addAnswer = (answer: Answer) => {
-        if(answers.findIndex(ans => ans.questionTitle === answer.questionTitle) === -1) {
+        if (answers.findIndex(ans => ans.questionTitle === answer.questionTitle) === -1) {
             setAnswers([...answers, answer])
         }
     }
 
+    const clearUser = (): void => {
+        setUser(defaultUser)
+    }
+
     return (
-        <UserContext.Provider value={{ user, setUser, answers, addAnswer }}>
+        <UserContext.Provider value={{ user, setUser, clearUser, answers, addAnswer }}>
             {children}
         </UserContext.Provider>
     )

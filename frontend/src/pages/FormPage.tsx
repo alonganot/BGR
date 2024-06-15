@@ -7,11 +7,10 @@ import { api } from "../../data/api";
 import { useQuery } from "react-query";
 import { useUserContext } from "../context/UserContext";
 import { usePreloadedImages } from "../context/PreLoadImagesContext";
-import { defaultUser } from "../context/UserContext";
 
 function FormPage() {
   const navigate = useNavigate();
-  const {answers, setUser} = useUserContext()
+  const { answers, clearUser } = useUserContext()
 
   const [page, setPage] = useState(1);
   const nextPage = () => {
@@ -23,7 +22,7 @@ function FormPage() {
     console.log(answers)
     alert("תודה רבה על המענה!")
     navigate("/")
-    setUser(defaultUser)
+    clearUser()
   };
 
   const { data, isLoading } = useQuery('getAllQuestions', () => api().questions().getAll());
@@ -32,16 +31,16 @@ function FormPage() {
 
   const [answerPicked, setAnswerPicked] = useState<boolean>(false)
 
-  const enableNextQuestion = () : void => {
+  const enableNextQuestion = (): void => {
     setAnswerPicked(true);
   }
 
   return (
     <>
       <Grid container height={'70%'}>
-        <Grid item xs={2} sx={{ alignSelf: 'end', zIndex:'4' }}>
-          {(data && page < data.length) && <Button variant="contained" onClick={nextPage} disabled={!answerPicked}>לשאלה הבאה</Button> }
-          {(data && page === data.length) && <Button variant="contained" color="success" onClick={finishForm}>לסיום הסקר</Button> }
+        <Grid item xs={2} sx={{ alignSelf: 'end', zIndex: '4' }}>
+          {(data && page < data.length) && <Button variant="contained" onClick={nextPage} disabled={!answerPicked}>לשאלה הבאה</Button>}
+          {(data && page === data.length) && <Button variant="contained" color="success" onClick={finishForm} disabled={!answerPicked}>לסיום הסקר</Button>}
         </Grid>
         <Grid item xs={8}>
           {

@@ -32,12 +32,12 @@ function SelfInfoForm() {
                     label="גיל"
                     type="number"
                     required
-                    value={user.age}
+                    value={user.age === 0 ? '' : user.age}
                     onChange={changeAge}
                     error={user.age <= MIN_AGE}
                     helperText={user.age <= MIN_AGE ? 'גיל לא תקין': ''}
                 />
-                <FormLabel id="gender-label">מין</FormLabel>
+                <FormLabel id="gender-label" error={user.gender === ''}>מין</FormLabel>
                 <RadioGroup
                     aria-labelledby="gender-label"
                     name="gender-select"    
@@ -50,7 +50,7 @@ function SelfInfoForm() {
                     )) 
                     }
                 </RadioGroup>
-                <FormLabel id="can-read-label">האם יודע/ת לקרוא</FormLabel>
+                <FormLabel id="can-read-label" error={user.canRead === ''}>האם יודע/ת לקרוא</FormLabel>
                 <Select
                     labelId="can-read-label"
                     id="can-read-select"
@@ -58,6 +58,7 @@ function SelfInfoForm() {
                     value={user.canRead}
                     label="האם יודע/ת לקרוא"
                     onChange={changeCanRead}
+                    error={user.canRead === ''}
                 >
                     {CAN_READ_OPTIONS.map((option, index) => (
                         <MenuItem key={index} value={option.name}>{option.displayName}</MenuItem>

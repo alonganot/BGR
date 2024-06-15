@@ -35,6 +35,12 @@ function LoginModal() {
         }
     }
 
+    const handleKeyPress = (event: React.KeyboardEvent<HTMLInputElement>): void => {
+        if (event.key === 'Enter') {
+            verifyPassword();
+        }
+    };
+
     return (
         <>
             <Button variant="outlined" onClick={changeIsOpen}>לעמוד הניהול</Button>
@@ -58,6 +64,7 @@ function LoginModal() {
                             required
                             value={password}
                             onChange={changeCurrPassword}
+                            onKeyDown={handleKeyPress}
                         />
                     </Box>
                     {errorMessage.length > 0 &&
