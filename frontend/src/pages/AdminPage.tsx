@@ -22,7 +22,7 @@ function AdminPage() {
   const visibleRows = () => {
     const start = tablePage * ROWS_PER_TABLE_PAGE;
     const end = (tablePage * ROWS_PER_TABLE_PAGE) + ROWS_PER_TABLE_PAGE;
-    return data!.slice(start, end);
+    return data!.slice(start, end).sort((a, b) => a.number - b.number);
   }
 
   const handleChangePage = (_event: unknown, newPage: number) => {
@@ -55,7 +55,7 @@ function AdminPage() {
             </TableHead>
             <TableBody>
               {visibleRows().map((row, index) => (
-                <QuestionRow key={index} question={row} />
+                <QuestionRow key={index} question={row} amountOfQuestions={data.length}/>
               ))}
             </TableBody>
           </Table>

@@ -35,9 +35,27 @@ function EditQuestionOptions({ question }: { question: Question }) {
 
     const changeOptionType = (index: number, oldType: string) => {
         const newType = oldType === 'image' ? 'icon' : 'image';
-        api().questions().changeQuestionOptionType(question._id, index, newType)
+        try {
+            api().questions().changeQuestionOptionType(question._id, index, newType)
+            alert('סוג האפשרות עודכן בהצלחה')
+        } catch (error) {
+            console.log(error);
+            alert('קרתה שגיאה! סוג השאלה לא התעדכן')     
+        }
     }
-    
+
+    const changeCorrectIndex = (index: number) => {
+        if (question.correctIndex !== index) {
+            try {
+                api().questions().changeCorrectIndex(question._id, index)
+                alert("התשובה הנכונה עודכנה בהצלחה")
+            } catch (error) {
+                console.log(error);
+                alert("קרתה שגיאה! התשובה הנכונה לא התעדכנה")
+            }
+        }
+    }
+
     return (
         <>
             <Button onClick={changeIsOpen}>
@@ -59,8 +77,8 @@ function EditQuestionOptions({ question }: { question: Question }) {
                         {question.options.map((option, index) => (
                             <Grid item xs={6} key={index} sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
                                 <Button variant='contained'
-                                    color={index === question.correctIndex ? 'success' : 'primary'} sx={{ marginBottom: '1vh' }}>
-                                    {/* TODO: CREATE A REQUEST FOR THIS */}
+                                    color={index === question.correctIndex ? 'success' : 'primary'} sx={{ marginBottom: '1vh' }}
+                                    onClick={() => changeCorrectIndex(index)}>
                                     {index === question.correctIndex ?
                                         'תשובה נכונה' : 'סמן כנכונה'}
                                 </Button>

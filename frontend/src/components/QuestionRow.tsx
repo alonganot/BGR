@@ -5,13 +5,19 @@ import { Question } from '../types/Question';
 import EditQuestionOptions from './EditQuestionOptions';
 import DeleteQuestionModal from './DeleteQuestionModal';
 
-function QuestionRow({ question }: { question: Question }) {
+function QuestionRow({ question, amountOfQuestions }: { question: Question, amountOfQuestions: number }) {
     const [isTitleEditable, setIsTitleEditable] = useState<boolean>(false);
     const [edittedTitle, setEdittedTitle] = useState<string>(question.title)
 
     const changeIsTitleEditable = () => {
         if (isTitleEditable && edittedTitle !== question.title) {
-            api().questions().changeTitleById(question._id, edittedTitle)
+            try {
+                api().questions().changeTitleById(question._id, edittedTitle)
+                alert('השם השתנה בהצלחה')
+            } catch (error) {
+                console.log(error)
+                alert('קרתה שגיאה! השם לא השתנה')
+            }
         }
 
         setIsTitleEditable(!isTitleEditable);
@@ -21,15 +27,26 @@ function QuestionRow({ question }: { question: Question }) {
         setEdittedTitle(event.target.value)
     }
 
+    const swapQuestionNums = (direction: string) => {
+        try {
+            api().questions().swapQuestionNumbers(question.number, direction === 'up' ? question.number - 1 : question.number + 1)
+            alert('השאלות התחלפו בהצלחה')
+
+        } catch (error) {
+            console.log(error)
+            alert("קרתה שגיאה! השאלות לא התחלפו")
+        }
+    }
+
     return (
         <TableRow
             sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
         >
             <TableCell align="right">
-                <Button>
+                <Button disabled={question.number === 1} onClick={() => swapQuestionNums('up')}>
                     <Icon>north</Icon>
                 </Button>
-                <Button>
+                <Button disabled={question.number === amountOfQuestions} onClick={() => swapQuestionNums('down')}>
                     <Icon>south</Icon>
                 </Button>
             </TableCell>

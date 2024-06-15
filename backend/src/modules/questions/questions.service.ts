@@ -70,4 +70,68 @@ export class QuestionsService {
 
     return question;
   }
+
+  async updateOptionType(id: string, index: number, type: string) {
+    const question = await this.questionModel.findById(id);
+    if (!question) {
+      throw new NotFoundException(`Question with ID ${id} not found`);
+    }
+
+    if (!question.options[index]) {
+      throw new NotFoundException(`Option at index ${index} not found for question with ID ${id}`);
+    }
+
+    if (type === 'image' || type === 'icon') {
+      question.options[index].type = type;
+      question.markModified('options');
+      await question.save();
+    } else {
+      throw new NotFoundException(`Option type invalid`);
+    }
+
+    return question;
+  }
+
+  async updateTitle(id: string, title: string) {
+    const question = await this.questionModel.findById(id);
+    if (!question) {
+      throw new NotFoundException(`Question with ID ${id} not found`);
+    }
+
+    question.title = title;
+    await question.save();
+
+    return question;
+  }
+
+  async updateCorrectIndex(id: string, correctIndex: number) {
+    const question = await this.questionModel.findById(id);
+    if (!question) {
+      throw new NotFoundException(`Question with ID ${id} not found`);
+    }
+
+    question.correctIndex = correctIndex;
+    await question.save();
+
+    return question;
+  }
+
+  async swap(firstNum: number, secondNum: number) {
+    const firstQuestion = await this.questionModel.findOne({ number: firstNum });
+    const secondQuestion = await this.questionModel.findOne({ number: secondNum });
+
+    if (!firstQuestion) {
+      throw new NotFoundException(`Question with number ${firstNum} not found`);
+    }
+
+    if (!secondQuestion) {
+      throw new NotFoundException(`Question with number ${secondNum} not found`);
+    }
+
+    firstQuestion.number = secondNum;
+    await firstQuestion.save();
+
+    secondQuestion.number = firstNum;
+    await secondQuestion.save();
+  }
 }

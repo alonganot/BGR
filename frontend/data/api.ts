@@ -68,7 +68,7 @@ export const api = () => {
                 },
                 async changeTitleById(id: string, title: string): Promise<void> {
                     try {
-                        await axios.patch(`${SERVER_URL}/questions/${id}/${title}`)
+                        await axios.patch(`${SERVER_URL}/questions/${id}/title`, {title: title})
                     } catch (error) {
                         console.log(error)
                         throw error
@@ -84,15 +84,23 @@ export const api = () => {
                 },
                 async changeQuestionOptionType(id: string, index: number, type: string): Promise<void> {
                     try {
-                        await axios.patch(`${SERVER_URL}/questions/${id}/${index}/type/${type}`)
+                        await axios.patch(`${SERVER_URL}/questions/${id}/index/${index}/type/${type}`)
                     } catch (error) {
                         console.log(error)
                         throw error
                     }
                 },
                 async swapQuestionNumbers(firstNum: number, secondNum: number): Promise<void> {
-                    try {
+                    try {                        
                         await axios.patch(`${SERVER_URL}/questions/number/${firstNum}/${secondNum}`)
+                    } catch (error) {
+                        console.log(error)
+                        throw error
+                    }
+                },
+                async changeCorrectIndex(id: string, correctIndex: number): Promise<void> {
+                    try {                        
+                        await axios.patch(`${SERVER_URL}/questions/${id}/correctIndex/${correctIndex}`)
                     } catch (error) {
                         console.log(error)
                         throw error
