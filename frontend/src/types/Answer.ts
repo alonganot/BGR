@@ -1,7 +1,6 @@
 export interface Answer {
     userId: string,
-    questionNum: number,
-    questionTitle: string //foreign key
+    questionId: string,
     selectedAnswer: number,
     type: string,
     wasCorrect: boolean,

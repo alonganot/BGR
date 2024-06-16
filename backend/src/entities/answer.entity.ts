@@ -17,7 +17,7 @@ export class Answer {
   questionId: Question;
 
   @Prop()
-  selectedAnswer: 0 | 1 | 2 | 3;
+  selectedAnswer: number;
 
   @Prop()
   type: string;

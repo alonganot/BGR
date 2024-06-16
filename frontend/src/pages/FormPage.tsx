@@ -10,7 +10,7 @@ import { usePreloadedImages } from "../context/PreLoadImagesContext";
 
 function FormPage() {
   const navigate = useNavigate();
-  const { answers, clearUser } = useUserContext()
+  const { user, answers, clearUser } = useUserContext()
 
   const [page, setPage] = useState(1);
   const nextPage = () => {
@@ -18,11 +18,30 @@ function FormPage() {
     setPage(page + 1);
   };
 
-  const finishForm = () => {
-    console.log(answers)
-    alert("תודה רבה על המענה!")
-    navigate("/")
-    clearUser()
+  const finishForm = async () => {
+    try {
+      const userId = await api().users().create(user);
+      if (userId === 'error') {
+        throw new Error('הבקשה להוסיף את המשתמש נכשלה')
+      }
+      
+      const answersWithUserId = answers.map(answer => {
+        answer.userId = userId
+        return answer
+      })
+
+      console.log(answersWithUserId);
+      
+      await api().answers().addAnswers(answersWithUserId)
+      alert("תודה רבה על המענה!")
+    } catch (error) {
+      console.log(error);
+      alert("קרתה שגיאה בהוספת התשובה לשאלה")
+      //TODO: לתת אופציה להוריד כקובץ את המענה הלוקאלי כדי שיוכלו לשלוח ונוסיף ידנית
+    } finally {
+      navigate("/")
+      clearUser()
+    }
   };
 
   const { data, isLoading } = useQuery('getAllQuestions', () => api().questions().getAll());
@@ -51,10 +70,7 @@ function FormPage() {
           {data && loadedImages.length > 0 &&
             <QuestionCard
               key={page}
-              questionNum={data[page - 1].number}
-              title={data[page - 1].title}
-              options={data[page - 1].options}
-              correctIndex={data[page - 1].correctIndex}
+              question={data[page - 1]}
               enableNextQuestion={enableNextQuestion}
             />
           }

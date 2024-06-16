@@ -8,11 +8,18 @@ export class UsersService {
   constructor(@InjectModel(User.name) private userModel: Model<User>) { }
 
   async add(userToAdd) {
+    const { user } = userToAdd
+    delete user.id    
+
     try {
-      const newUser = await this.userModel.create(userToAdd);
+      const newUser = await this.userModel.create(user);
       newUser.save();
-    } catch {
-      return 'failed save';
+
+      return newUser._id
+      
+    } catch (error) {
+      console.log(error);
+      throw error
     }
   }
 

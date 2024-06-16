@@ -18,7 +18,7 @@ export class User {
   age: number;
 
   @Prop()
-  gender: 'male' | 'female';
+  gender: 'male' | 'female' | 'other';
 
   @Prop()
   canRead: 'yes' | 'no' | 'some';

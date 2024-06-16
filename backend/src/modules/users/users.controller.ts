@@ -6,7 +6,7 @@ export class UsersController {
   constructor(private readonly usersService: UsersService) {}
   @Post()
   add(@Body() newUser) {
-    this.usersService.add(newUser);
+    return this.usersService.add(newUser);
   }
 
   @Post('login')

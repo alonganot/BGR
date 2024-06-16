@@ -19,11 +19,10 @@ export const api = () => {
                                 user
                             }
                         });
-                        console.log(res?.data);
-                        return res?.data.id
+                        return res?.data
                     } catch (error) {
                         console.log(error)
-                        return ''
+                        throw error
                     }
                 },
                 async verify(password: string): Promise<{ statusCode: number, message: string }> {
@@ -54,6 +53,7 @@ export const api = () => {
                         const res = await axios.get(`${SERVER_URL}/questions`)
                         return res?.data
                     } catch (error) {
+                        alert("קרתה שגיאה, בדקו את החיבור לאינטרנט או פנו לתמיכה")
                         console.log(error)
                         return []
                     }

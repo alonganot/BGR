@@ -29,7 +29,7 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
     const [answers, setAnswers] = useState<Answer[]>([]);
 
     const addAnswer = (answer: Answer) => {
-        if (answers.findIndex(ans => ans.questionTitle === answer.questionTitle) === -1) {
+        if (answers.findIndex(ans => ans.questionId === answer.questionId) === -1) {
             setAnswers([...answers, answer])
         }
     }

@@ -2,22 +2,18 @@ import { Box, Button, Card, Grid, Typography } from "@mui/material";
 import { TopCenterTitle } from "../styles/SharedStyles";
 import { useUserContext } from "../context/UserContext";
 import { Fragment, useState } from "react";
-import { Option } from "../types/Option";
 import { usePreloadedImages } from "../context/PreLoadImagesContext";
+import { Question } from "../types/Question";
 
 function QuestionCard({
-  questionNum,
-  title,
-  options,
-  correctIndex,
+  question,
   enableNextQuestion
 }: {
-  questionNum: number;
-  title: string;
-  options: Option[];
-  correctIndex: number;
+  question: Question;
   enableNextQuestion: () => void
 }) {
+  const {_id, title, options, correctIndex, number } = question
+
   const [loaded, setLoaded] = useState<boolean>(false)
   const { loadedImages } = usePreloadedImages()
 
@@ -36,7 +32,7 @@ function QuestionCard({
   const validateAnswer = (index: number) => {
     enableNextQuestion()
     addAnswer({
-      userId: user.id, questionNum: questionNum, questionTitle: title, selectedAnswer: index,
+      userId: user.id, questionId: _id, selectedAnswer: index,
       type: options[index].type, wasCorrect: index === correctIndex, secondsTaken: calcSecondsPassed(new Date())
     });
   };
@@ -45,7 +41,7 @@ function QuestionCard({
   return (
     <>
       <TopCenterTitle height={2} variant="h4">
-        ? באיזה תמונה את.ה רואה {title}
+        ? באיזה תמונה רואים {title}
       </TopCenterTitle>
       <Grid container rowSpacing={"5vh"} position={'fixed'} top={'10%'} left={'0%'}>
         {options.map((option, index) => (
@@ -73,7 +69,7 @@ function QuestionCard({
         <Grid item xs={2} />
       </Grid>
       <Box display={'flex'} justifyContent={'center'} height={'102%'} alignItems={'self-end'}>
-        <Typography>שאלה {questionNum}</Typography>
+        <Typography>שאלה {number}</Typography>
       </Box>
     </>
   );

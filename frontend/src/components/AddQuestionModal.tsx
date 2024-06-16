@@ -51,7 +51,6 @@ function AddQuestionModal({ questionNum }: { questionNum: number }) {
     }
 
     const addQuestion = async () => {
-        console.log(question)
         await api().questions().add(question)
         alert('השאלה התווספה בהצלחה')
         setIsOpen(false)

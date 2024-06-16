@@ -16,4 +16,9 @@ export class AnswersController {
   findAll() {
     return this.answersService.findAll();
   }
+
+  @Post()
+  add(@Body() newAnswers) {
+    this.answersService.add(newAnswers);
+  }
 }
