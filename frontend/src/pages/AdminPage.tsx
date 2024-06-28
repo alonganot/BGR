@@ -52,6 +52,8 @@ function AdminPage() {
           frameCity: user.frame.city
         };
 
+        answers.sort((a: any, b: any) => a.question.number - b.question.number);
+
         const allAnswers = answers.map((answer: any, index: any) => ({
           [`questionNumber_${index+1}`]: answer.question.number,
           [`questionTitle_${index+1}`]: answer.question.title,
