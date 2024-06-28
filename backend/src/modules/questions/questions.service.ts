@@ -24,7 +24,7 @@ export class QuestionsService {
   }
 
   findAll() {
-    return this.questionModel.find({}).exec();
+    return this.questionModel.find({}).sort({number: 1}).exec();
   }
 
   findOne(id: string) {
