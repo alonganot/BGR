@@ -1,4 +1,4 @@
-import { Box, Button, Grid, Icon, Input, Modal, Switch, Typography } from '@mui/material'
+import { Box, Button, Grid, Icon, Input, Modal, Switch, Tooltip, Typography } from '@mui/material'
 import { Question } from '../types/Question'
 import { ChangeEvent, useState } from 'react';
 import { modalStyle } from '../styles/SharedStyles';
@@ -60,9 +60,11 @@ function AddQuestionModal({ questionNum }: { questionNum: number }) {
 
     return (
         <>
-            <Button onClick={changeIsOpen}>
-                <Icon>add</Icon>
-            </Button>
+            <Tooltip title="יצירת שאלה" placement="top">
+                <Button onClick={changeIsOpen}>
+                    <Icon>add</Icon>
+                </Button>
+            </Tooltip>
             <Modal
                 open={isOpen}
                 onClose={changeIsOpen}

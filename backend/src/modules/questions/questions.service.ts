@@ -1,4 +1,4 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { HttpException, Injectable, NotFoundException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { Question } from 'src/entities/question.entity';
@@ -18,8 +18,8 @@ export class QuestionsService {
 
       const newQuestion = await this.questionModel.create(finalQuestion);
       newQuestion.save();
-    } catch {
-      return 'failed save';
+    } catch(error) {
+      throw new HttpException(error, 500);
     }
   }
 

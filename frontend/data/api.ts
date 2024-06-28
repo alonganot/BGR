@@ -68,7 +68,7 @@ export const api = () => {
                 },
                 async changeTitleById(id: string, title: string): Promise<void> {
                     try {
-                        await axios.patch(`${SERVER_URL}/questions/${id}/title`, {title: title})
+                        await axios.patch(`${SERVER_URL}/questions/${id}/title`, { title: title })
                     } catch (error) {
                         console.log(error)
                         throw error
@@ -76,7 +76,7 @@ export const api = () => {
                 },
                 async changeQuestionOptionURL(id: string, index: number, url: string): Promise<void> {
                     try {
-                        await axios.patch(`${SERVER_URL}/questions/${id}/index/${index}/url`, {url: url})
+                        await axios.patch(`${SERVER_URL}/questions/${id}/index/${index}/url`, { url: url })
                     } catch (error) {
                         console.log(error)
                         throw error
@@ -91,7 +91,7 @@ export const api = () => {
                     }
                 },
                 async swapQuestionNumbers(firstNum: number, secondNum: number): Promise<void> {
-                    try {                        
+                    try {
                         await axios.patch(`${SERVER_URL}/questions/number/${firstNum}/${secondNum}`)
                     } catch (error) {
                         console.log(error)
@@ -99,7 +99,7 @@ export const api = () => {
                     }
                 },
                 async changeCorrectIndex(id: string, correctIndex: number): Promise<void> {
-                    try {                        
+                    try {
                         await axios.patch(`${SERVER_URL}/questions/${id}/correctIndex/${correctIndex}`)
                     } catch (error) {
                         console.log(error)
@@ -107,39 +107,55 @@ export const api = () => {
                     }
                 },
                 async add(question: Question): Promise<() => number> {
-                    const res = await axios({
-                        method: 'post',
-                        url: `${SERVER_URL}/questions`,
-                        headers: {},
-                        data: {
-                            question
-                        }
-                    });
-                    console.log(res?.data);
+                    try {
+                        const res = await axios({
+                            method: 'post',
+                            url: `${SERVER_URL}/questions`,
+                            headers: {},
+                            data: {
+                                question
+                            }
+                        });
 
-                    return res?.data.count
+                        return res?.data.count
+                    } catch (error) {
+                        console.log(error)
+                        throw error
+                    }
                 }
             }
         },
         answers() {
             return {
                 async getAll(): Promise<Answer[]> {
-                    const res = await axios.get(`${SERVER_URL}/answers`)
-                    console.log(res?.data);
-                    return res?.data
+                    try {
+
+                        const res = await axios.get(`${SERVER_URL}/answers`)
+                        console.log(res?.data);
+
+                        return res?.data
+                    } catch (error) {
+                        console.log(error);
+                        throw error
+                    }
                 },
                 async addAnswers(answers: Answer[]): Promise<() => number> {
-                    const res = await axios({
-                        method: 'post',
-                        url: `${SERVER_URL}/answers`,
-                        headers: {},
-                        data: {
-                            answers
-                        }
-                    });
-                    console.log(res?.data);
+                    try {
+                        const res = await axios({
+                            method: 'post',
+                            url: `${SERVER_URL}/answers`,
+                            headers: {},
+                            data: {
+                                answers
+                            }
+                        });
+                        console.log(res?.data);
 
-                    return res?.data.count
+                        return res?.data.count
+                    } catch (error) {
+                        console.log(error);
+                        throw error
+                    }
                 }
             }
         }

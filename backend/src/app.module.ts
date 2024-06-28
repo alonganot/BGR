@@ -11,7 +11,7 @@ import { MongooseModule } from '@nestjs/mongoose';
     UsersModule,
     QuestionsModule,
     AnswersModule,
-    MongooseModule.forRoot('mongodb+srv://alonga:password12321@alonga.zyoscl0.mongodb.net/BGR'),
+    MongooseModule.forRoot(`mongodb+srv://alonga:password12321@alonga.zyoscl0.mongodb.net/${process.env.NODE_ENV=== 'production' ? "BGR" : "BGRdev"}`),
   ],
   controllers: [AppController],
   providers: [AppService],

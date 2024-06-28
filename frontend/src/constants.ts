@@ -27,3 +27,22 @@ export const GENDER_OPTIONS = [
         displayName: "אחר"
     }
 ]
+
+export const SELECTED_ANSWER_OPTIONS = [
+    {
+        name: 0,
+        displayName: "ב"
+    },
+    {
+        name: 1,
+        displayName: "א"
+    },
+    {
+        name: 2,
+        displayName: "ד"
+    },
+    {
+        name: 3,
+        displayName: "ג"
+    }
+]

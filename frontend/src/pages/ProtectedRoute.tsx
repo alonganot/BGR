@@ -15,7 +15,7 @@ const ProtectedRoute = ({ children }: { children: ReactNode }) => {
 
         return <>
             <Typography variant='h2' sx={{ marginBottom: '2vh' }}>יש להתחבר דרך עמוד הבית</Typography>
-            <Button variant="outlined" onClick={() => logout()}><Link to="/">חזרה לדף הבית</Link></Button>
+            <Button variant="outlined" onClick={() => logout()}><Link to="/">לדף הבית</Link></Button>
         </>
     }
 

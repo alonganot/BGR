@@ -77,7 +77,7 @@ function FormPage() {
         </Grid>
         <Grid item xs={2}>
           <Button variant="outlined">
-            <Link to="/">חזרה לדף הבית</Link>
+            <Link to="/">לדף הבית</Link>
           </Button>
         </Grid>
       </Grid>

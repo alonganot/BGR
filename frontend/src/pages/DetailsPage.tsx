@@ -26,7 +26,7 @@ function DetailsPage() {
       <Grid container>
         <Grid item xs={10} />
         <Grid item xs={2}>
-          <Button variant="outlined" onClick={clearUser}><Link to="/">חזרה לדף הבית</Link></Button>
+          <Button variant="outlined" onClick={clearUser}><Link to="/">לדף הבית</Link></Button>
         </Grid>
       </Grid>
       <Grid container justifyContent={'space-evenly'}>

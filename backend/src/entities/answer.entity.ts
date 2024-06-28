@@ -5,6 +5,14 @@ import { Question } from './question.entity';
 
 export type AnswerDocument = HydratedDocument<Answer>;
 
+const getIsraelTime = () => {
+  const currentTime = new Date();
+  const israelOffset = 3 * 60 * 60 * 1000; // Israel is UTC+3
+  const utcTime = currentTime.getTime();
+
+  return new Date(utcTime + israelOffset);
+}
+
 @Schema({ collection: 'answers' })
 export class Answer {
   @Prop({ type: mongoose.Schema.Types.ObjectId })
@@ -27,6 +35,9 @@ export class Answer {
 
   @Prop()
   secondsTaken: number;
+
+  @Prop({ type: Date, default: () => getIsraelTime() })
+  createdAt: Date;
 }
 
 export const AnswerSchema = SchemaFactory.createForClass(Answer);
