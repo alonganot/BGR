@@ -18,8 +18,6 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     };
 
     const logout = () => {
-        console.log('eee');
-        
         setIsAuthenticated(false);
     };
 
