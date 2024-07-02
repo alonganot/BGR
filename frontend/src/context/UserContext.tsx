@@ -1,4 +1,4 @@
-import React, { Dispatch, ReactNode, SetStateAction, VoidFunctionComponent, useContext, useState } from "react";
+import React, { Dispatch, ReactNode, SetStateAction, useContext, useState } from "react";
 import { User } from "../types/User";
 import { Answer } from "../types/Answer";
 
