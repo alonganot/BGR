@@ -1,4 +1,4 @@
-import React, { Dispatch, ReactNode, SetStateAction, useContext, useState } from "react";
+import React, { Dispatch, ReactNode, SetStateAction, VoidFunctionComponent, useContext, useState } from "react";
 import { User } from "../types/User";
 import { Answer } from "../types/Answer";
 
@@ -7,7 +7,8 @@ interface iUserContext {
     setUser: Dispatch<SetStateAction<User>>,
     clearUser: () => void,
     answers: Answer[],
-    addAnswer: (answer: Answer) => void
+    addAnswer: (answer: Answer) => void,
+    clearAnswers: () => void
 }
 const UserContext = React.createContext<iUserContext | null>(null)
 
@@ -34,12 +35,16 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
         }
     }
 
+    const clearAnswers = (): void => {
+        setAnswers([])
+    }
+
     const clearUser = (): void => {
         setUser(defaultUser)
     }
 
     return (
-        <UserContext.Provider value={{ user, setUser, clearUser, answers, addAnswer }}>
+        <UserContext.Provider value={{ user, setUser, clearUser, answers, addAnswer, clearAnswers }}>
             {children}
         </UserContext.Provider>
     )

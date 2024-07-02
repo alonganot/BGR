@@ -10,7 +10,7 @@ import { usePreloadedImages } from "../context/PreLoadImagesContext";
 
 function FormPage() {
   const navigate = useNavigate();
-  const { user, answers, clearUser } = useUserContext()
+  const { user, answers, clearUser, clearAnswers } = useUserContext()
 
   const [page, setPage] = useState(1);
   const nextPage = () => {
@@ -41,6 +41,7 @@ function FormPage() {
     } finally {
       navigate("/")
       clearUser()
+      clearAnswers()
     }
   };
 
