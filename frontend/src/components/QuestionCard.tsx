@@ -4,6 +4,7 @@ import { useUserContext } from "../context/UserContext";
 import { Fragment, useState } from "react";
 import { usePreloadedImages } from "../context/PreLoadImagesContext";
 import { Question } from "../types/Question";
+import { DONT_KNOW_INDEX } from "../constants";
 
 function QuestionCard({
   question,
@@ -33,7 +34,8 @@ function QuestionCard({
     enableNextQuestion()
     addAnswer({
       userId: user.id, questionId: _id, selectedAnswer: index,
-      type: options[index].type, wasCorrect: index === correctIndex, secondsTaken: calcSecondsPassed(new Date())
+      type: index === DONT_KNOW_INDEX ? options[correctIndex].type : options[index].type, 
+      wasCorrect: index === correctIndex, secondsTaken: calcSecondsPassed(new Date())
     });
   };
 
@@ -43,6 +45,9 @@ function QuestionCard({
       <TopCenterTitle height={2} variant="h4">
         ? באיזה תמונה רואים {title}
       </TopCenterTitle>
+      <Button variant="contained" color="warning"
+        sx={{position: "fixed", top: "83%", left: "6%", zIndex: "2"}} onClick={() => { 
+          validateAnswer(DONT_KNOW_INDEX)}}>אינני יודע/ת</Button>
       <Grid container rowSpacing={"5vh"} position={'fixed'} top={'10%'} left={'0%'}>
         {options.map((option, index) => (
           <Fragment key={index}>

@@ -6,8 +6,12 @@ import styled from "styled-components";
 import '../styles/HomePage.css'
 import { Subtitle, Title } from "../styles/SharedStyles";
 import LoginModal from "../components/LoginModal";
+import { useEffect } from "react";
+import { useUserContext } from "../context/UserContext";
 
 function HomePage() {
+  const { clearUser, clearAnswers } = useUserContext()
+
   const Information = styled(Typography)({
     textAlign: 'start',
     paddingRight: '3vw',
@@ -25,7 +29,12 @@ function HomePage() {
   בתודה על שיתוף הפעולה!
   צוות המחקר של קרן שלם.
   `
-
+  
+  useEffect(() => {
+    clearUser()
+    clearAnswers()
+  }, []);
+  
   return (
     <>
       <Grid container>

@@ -28,6 +28,8 @@ export const GENDER_OPTIONS = [
     }
 ]
 
+export const DONT_KNOW_INDEX = 5
+
 export const SELECTED_ANSWER_OPTIONS = [
     {
         name: 0,
@@ -44,5 +46,8 @@ export const SELECTED_ANSWER_OPTIONS = [
     {
         name: 3,
         displayName: "ג"
+    },
+    { name: DONT_KNOW_INDEX,
+        displayName: "לא יודע/ת"
     }
 ]
